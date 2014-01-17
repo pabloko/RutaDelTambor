@@ -1,0 +1,1360 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <title>Proindemniza</title>
+  <link rel="stylesheet" href="jquery.mobile-1.3.1.min.css">
+  <link rel="stylesheet" href="codiqa.ext.css">
+  <link rel="stylesheet" href="jqm-icon-pack-fa.css">
+  <!-- jQuery and jQuery Mobile -->
+  <script src="jquery-1.9.1.min.js"></script>
+  <script src="jquery.mobile-1.3.1.min.js"></script>
+  <!-- Extra Codiqa features -->
+  <script src="codiqa.ext.js"></script>
+
+   <style type="text/css">
+    .menu-pad {
+        padding:30px;
+        text-align: center;
+    }
+    #page1 ul li a {
+        text-align: center;
+        width:100%;
+    }
+    #page1 ul li {
+        text-align: center;
+
+    }
+  </style>
+
+
+  <script type="text/javascript">
+
+if(typeof(AN)==="undefined"){var AN={}}AN.instances={symbols:[],controllers:[]};AN.apiVersion=1;AN.Controller=function(){return{currentScene:false,userData:{},setConfig:function(a){AN.instances.controllers.push(this);this.events=a.events;this.prefix=a.cssPrefix;this.projectActions=a.projectActions;this.basePath=a.basePath?a.basePath:"";this.olElement=document.querySelector("#"+a.parentId+" ol");var d=this.olElement.children;this.useOrmma=a.ormma;this.scenes=[];this.scenesById={};this.sceneByName={};var g;for(var e=0;e<a.scenes.length;e++){g=a.scenes[e];g.element=d[e];g.timelinesById={};g.timelinesByName={};for(var c=0;c<g.timelines.length;c++){g.timelinesById[g.timelines[c].id]=g.timelines[c];g.timelinesByName[g.timelines[c].name]=g.timelines[c]}this.scenesById[g.id]=g;this.scenes.push(g);if(g.name){this.sceneByName[g.name]=g}}this.setupListeners();this.startSceneByName=this.goToSceneByName;this.startSceneById=this.goToSceneById;this.startSceneByID=this.startSceneById;this.symbolInstancesByHtmlId={};this.symbolInstancesById={};this.symbols=[];var h,b,f;for(var e=0;e<a.symbols.length;e++){h=a.symbols[e];this.symbolInstancesById[h.id]=[];b=this.olElement.querySelectorAll(".an-symbol-container-"+h.id);for(var c=0;c<b.length;c++){f=new AN.Symbol();f.setConfig(b[c],h,this);this.symbolInstancesByHtmlId[b[c].id]=f;this.symbolInstancesById[h.id].push(f);this.symbols.push(f)}}this.fireAction(this.projectActions,"init");this.goToScene(this.scenes[0])},setupListeners:function(){var l=this;this.browser="unknown";if(document.body.style.MozAnimationName!==undefined){this.browser="moz"}function h(j){var i;if(l.browser==="moz"){i=j.target;while(i=i.parentNode){if(i===l.currentScene.element){l.onAnimationEnd();return}}}else{l.onAnimationEnd()}}this.olElement.addEventListener("webkitAnimationEnd",h,false);this.olElement.addEventListener("animationend",h,false);function c(i){i.element.addEventListener("mousemove",function(j){i.mousemoveAction.call(l.userData,l,j)},false)}var g;for(var e=0;e<this.scenes.length;e++){g=this.scenes[e];if(g.mousemoveAction){c(g)}}function a(m,j,i){m.addEventListener(j,function(n){i.call(l.userData,l,n)},false)}var f,b,k;for(var e=0;e<this.events.length;e++){b=this.events[e];k=b.type;f=document.getElementById(b.id);for(var d=0;d<k.length;d++){a(f,k[d],b.handler)}}},onAnimationEnd:function(){this.runningAnimationCount--;if(this.runningAnimationCount===0){this.onAllAnimationEnd()}},onAllAnimationEnd:function(){var a=this.currentScene.currentTimeline.endWaitTime;if(a){var b=this;this.sceneTimeout=setTimeout(function(){b.onSceneFinish()},a*1000)}else{this.onSceneFinish()}},forceRefresh:function(a){this.forceRefreshValue=a.element.offsetHeight},fireAction:function(b,a){if(b&&b[a]){b[a].call(this.userData,this)}},getSymbolByHtmlId:function(a){return this.symbolInstancesByHtmlId[a]},getSymbolByInstanceId:function(b){var a=this.olElement.querySelector(".an-symbol-container.an-symbol-"+b);return this.getSymbolByHtmlId(a.id)},getSymbols:function(){return this.symbols},getSymbolsBySymbolMasterId:function(a){return this.symbolInstancesById[a]},getUserData:function(){return this.userData},getTimelineByIndex:function(a){return this.currentScene.timelines[a]},getTimelineById:function(a){return this.currentScene.timelinesById[a]},getTimelineByName:function(a){return this.currentScene.timelinesByName[a]},getCurrentTimeline:function(){return this.currentScene.currentTimeline},getCurrentScene:function(){return this.currentScene},getSceneByIndex:function(a){return this.scenes[a]},getSceneById:function(a){return this.scenesById[a]},getSceneByName:function(a){return this.sceneByName[a]},goToNextTimeline:function(){var b=this.currentScene.timelines.indexOf(this.currentScene.currentTimeline);var a=Math.min(b+1,this.currentScene.timelines.length-1);if(a===b){return}this.goToTimelineByIndex(a)},goToPreviousTimeline:function(){var b=this.currentScene.timelines.indexOf(this.currentScene.currentTimeline);var a=Math.max(b-1,0);if(b===a){return}this.goToTimelineByIndex(a)},goToTimelineById:function(a){this.goToScene(this.currentScene,this.currentScene.timelinesById[a])},goToTimelineByName:function(a){this.goToScene(this.currentScene,this.currentScene.timelinesByName[a])},goToTimelineByIndex:function(a){this.goToScene(this.currentScene,this.currentScene.timelines[a])},goToTimeline:function(a){this.goToScene(this.currentScene,a)},goToNextScene:function(){var b=this.scenes.indexOf(this.currentScene);var a=Math.min(b+1,this.scenes.length-1);if(b===a){return}this.goToSceneByIndex(a)},goToPreviousScene:function(){var a=this.scenes.indexOf(this.currentScene);var b=Math.max(a-1,0);if(a===b){return}this.goToSceneByIndex(b)},goToSceneByIndex:function(a){this.goToScene(this.scenes[a])},goToSceneByName:function(a){this.goToScene(this.sceneByName[a])},goToSceneById:function(a,b){var c=this.scenesById[a];this.goToScene(c,c.timelinesById[b])},goToScene:function(g,f){var d=g;var e=this.currentScene;var a=f;var c=e?e.currentTimeline:false;if(a===undefined){a=d.timelines[0]}var b=false;if(c===a&&e===d){b=true}else{if(e){e.element.setAttribute("class","")}}this.fireAction(c,"exitAction");clearTimeout(this.sceneTimeout);if(e!==d){this.fireAction(e,"exitAction");this.fireAction(d,"initAction")}this.fireAction(a,"initAction");this.runningAnimationCount=a.animationCount;this.currentScene=d;d.currentTimeline=a;var h="t-"+a.id;if(b||this.browser==="moz"){d.element.setAttribute("class","run restart "+h);this.forceRefresh(d)}d.element.setAttribute("class","run "+h);if(!b&&this.useOrmma){this.ormmaNextScene(d)}this.fireAction(a,"startAction");if(a.animationCount===0){this.onAllAnimationEnd()}},replayScene:function(){console.warn("replayScene is deprecated. Use restartScene instead.");this.restartScene()},restartScene:function(){this.goToScene(this.currentScene)},restartTimeline:function(){this.goToScene(this.currentScene,this.currentScene.currentTimeline)},onSceneFinish:function(){this.fireAction(this.currentScene.currentTimeline,"endAction")},goToURL:function(a){document.location.href=a},getElementById:function(a){return document.getElementById(this.getElementIdById(a))},getElementIdById:function(a){return this.prefix+a},getUrlForLocalAsset:function(b){var a="assets/"+b;if(this.basePath){a=this.basePath+"/"+a}return a},ormmaNextScene:function(c){var a=ormma.getState();if(c.dimensions.expanded){var i=ormma.getMaxSize();if(a!=="expanded"){ormma.expand({x:0,y:0,width:i.width,height:i.height})}var b="";var d=c.element.offsetHeight;var g=c.element.offsetWidth;var e=(i.height-d)/2;var h=(i.width-g)/2;b+=" translate3d("+Math.round(h)+"px,"+Math.round(e)+"px,0)";if(c.dimensions.fit){var f=Math.min(i.width/g,i.height/d);b+=" scale3d("+f+","+f+",1)"}c.element.style.webkitTransform=b}else{if(a==="expanded"){ormma.close()}ormma.resize(c.dimensions.width,c.dimensions.height)}}}};window.addEventListener('load',function(){var configData={parentId:'an-anim',cssPrefix:'',ormma:false,mraid:false,layout:{"type":"absolute","width":480,"height":320},scenes:[{id:0,dimensions:{height:230,width:270,expanded:false,fit:false},timelines:[{id:"0",name:'Timeline 1',animationCount:4,duration:5.493,lastKeyframeTime:5.493,endAction:function(controller){controller.restartScene();}}]}],symbols:[],projectActions:{},events:[],externalResources:[]};setTimeout(function(){var controller=new AN.Controller;controller.setConfig(configData);},0);},false);
+</script>
+
+
+<style type="text/css">
+
+#an-anim > ol{list-style:none;margin:0;padding:0;}#an-anim > ol > li{margin:0;padding:0;display:none;}#an-anim > ol > li.run{display:block;}#an-anim .an-stage{overflow:hidden;margin:0;padding:0;}#an-anim .an-stage div{position:absolute;}.an-stage *{margin:0;padding:0;font-smoothing:antialiased;-webkit-font-smoothing:antialiased;}#an-anim .an-stage img{position:absolute;top:0;left:0;}#an-anim .AN-Scene-Description{display:none;}#an-anim iframe{border:none;height:100%;width:100%}#an-anim .an-stage{position:absolute;top:0;left:0;width:100%;height:100%;}#an-anim{height:320px;width:480px;position:relative;}#an-anim{background-color:rgba(255,255,255,1);font-family:"Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;font-size:12px;line-height:1.3;}#an-obj-1{transform:translate3d(56px, 49px, 0px);-webkit-transform:translate3d(56px, 49px, 0px);width:148px;height:183px;top:0;left:0;}#an-obj-2{transform:translate3d(123px, 74px, 0px);-webkit-transform:translate3d(123px, 74px, 0px);width:88px;height:88px;top:0;left:0;}@-webkit-keyframes ani-an-obj-2-0{0%{-webkit-transform:translate3d(123px, 74px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);}7.3121%{-webkit-transform:translate3d(136px, 117px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-10.4deg);}14.6242%{-webkit-transform:translate3d(123px, 74px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);}22.5838%{-webkit-transform:translate3d(126px, 74px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-9.1deg);}30.5435%{-webkit-transform:translate3d(136px, 117px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-10.4deg);}34.4061%{-webkit-transform:translate3d(126px, 74px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-9.1deg);}39.5473%{-webkit-transform:translate3d(121px, 74px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);}47.3454%{-webkit-transform:translate3d(134px, 117px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-10.4deg);}55.3511%{-webkit-transform:translate3d(121px, 74px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);}61.9627%{-webkit-transform:translate3d(124px, 74px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-9.1deg);}69.4168%{-webkit-transform:translate3d(134px, 117px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-10.4deg);}72.2683%{-webkit-transform:translate3d(124px, 74px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-9.1deg);}75.0834%{-webkit-transform:translate3d(123px, 74px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);}81.1631%{-webkit-transform:translate3d(136px, 117px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-10.4deg);}85.779%{-webkit-transform:translate3d(123px, 74px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);}91.6009%{-webkit-transform:translate3d(126px, 74px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-9.1deg);}96.6959%{-webkit-transform:translate3d(136px, 117px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-10.4deg);}100%{-webkit-transform:translate3d(126px, 74px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-9.1deg);}}@keyframes ani-an-obj-2-0{0%{transform:translate3d(123px, 74px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);}7.3121%{transform:translate3d(136px, 117px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-10.4deg);}14.6242%{transform:translate3d(123px, 74px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);}22.5838%{transform:translate3d(126px, 74px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-9.1deg);}30.5435%{transform:translate3d(136px, 117px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-10.4deg);}34.4061%{transform:translate3d(126px, 74px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-9.1deg);}39.5473%{transform:translate3d(121px, 74px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);}47.3454%{transform:translate3d(134px, 117px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-10.4deg);}55.3511%{transform:translate3d(121px, 74px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);}61.9627%{transform:translate3d(124px, 74px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-9.1deg);}69.4168%{transform:translate3d(134px, 117px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-10.4deg);}72.2683%{transform:translate3d(124px, 74px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-9.1deg);}75.0834%{transform:translate3d(123px, 74px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);}81.1631%{transform:translate3d(136px, 117px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-10.4deg);}85.779%{transform:translate3d(123px, 74px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);}91.6009%{transform:translate3d(126px, 74px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-9.1deg);}96.6959%{transform:translate3d(136px, 117px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-10.4deg);}100%{transform:translate3d(126px, 74px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-9.1deg);}}.run.t-0 #an-obj-2{animation-name:ani-an-obj-2-0;-webkit-animation-name:ani-an-obj-2-0;animation-duration:5.3949s;-webkit-animation-duration:5.3949s;animation-delay:0.098s;-webkit-animation-delay:0.098s;animation-fill-mode:both;-webkit-animation-fill-mode:both;}.t-0 #an-obj-2{transform:translate3d(126px, 74px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-9.1deg);-webkit-transform:translate3d(126px, 74px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-9.1deg);}.restart.t-0 #an-obj-2{transform:translate3d(123px, 74px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);-webkit-transform:translate3d(123px, 74px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);}.restart #an-obj-2{animation-name:none !important;-webkit-animation-name:none !important;}#an-obj-3{transform:translate3d(33px, 81px, 0px);-webkit-transform:translate3d(33px, 81px, 0px);width:137px;height:103px;top:0;left:0;}@-webkit-keyframes ani-an-obj-3-0{0%{-webkit-transform:translate3d(33px, 81px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);}7.3121%{-webkit-transform:translate3d(40px, 71px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-13.3deg);}14.6242%{-webkit-transform:translate3d(33px, 81px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);}22.5838%{-webkit-transform:translate3d(31px, 83px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(1deg);}30.5435%{-webkit-transform:translate3d(40px, 71px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-13.3deg);}34.4061%{-webkit-transform:translate3d(31px, 83px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(1deg);}39.5473%{-webkit-transform:translate3d(34px, 81px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);}47.3454%{-webkit-transform:translate3d(41px, 71px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-13.3deg);}55.3511%{-webkit-transform:translate3d(34px, 81px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);}61.9627%{-webkit-transform:translate3d(32px, 83px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(1deg);}69.4168%{-webkit-transform:translate3d(41px, 71px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-13.3deg);}72.2683%{-webkit-transform:translate3d(32px, 83px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(1deg);}75.0834%{-webkit-transform:translate3d(33px, 81px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);}81.1631%{-webkit-transform:translate3d(40px, 71px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-13.3deg);}85.779%{-webkit-transform:translate3d(33px, 81px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);}90.8739%{-webkit-transform:translate3d(31px, 83px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(1deg);}95.9689%{-webkit-transform:translate3d(40px, 71px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-13.3deg);}100%{-webkit-transform:translate3d(31px, 83px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(1deg);}}@keyframes ani-an-obj-3-0{0%{transform:translate3d(33px, 81px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);}7.3121%{transform:translate3d(40px, 71px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-13.3deg);}14.6242%{transform:translate3d(33px, 81px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);}22.5838%{transform:translate3d(31px, 83px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(1deg);}30.5435%{transform:translate3d(40px, 71px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-13.3deg);}34.4061%{transform:translate3d(31px, 83px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(1deg);}39.5473%{transform:translate3d(34px, 81px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);}47.3454%{transform:translate3d(41px, 71px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-13.3deg);}55.3511%{transform:translate3d(34px, 81px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);}61.9627%{transform:translate3d(32px, 83px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(1deg);}69.4168%{transform:translate3d(41px, 71px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-13.3deg);}72.2683%{transform:translate3d(32px, 83px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(1deg);}75.0834%{transform:translate3d(33px, 81px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);}81.1631%{transform:translate3d(40px, 71px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-13.3deg);}85.779%{transform:translate3d(33px, 81px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);}90.8739%{transform:translate3d(31px, 83px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(1deg);}95.9689%{transform:translate3d(40px, 71px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-13.3deg);}100%{transform:translate3d(31px, 83px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(1deg);}}.run.t-0 #an-obj-3{animation-name:ani-an-obj-3-0;-webkit-animation-name:ani-an-obj-3-0;animation-duration:5.3949s;-webkit-animation-duration:5.3949s;animation-delay:0.098s;-webkit-animation-delay:0.098s;animation-fill-mode:both;-webkit-animation-fill-mode:both;}.t-0 #an-obj-3{transform:translate3d(31px, 83px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(1deg);-webkit-transform:translate3d(31px, 83px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(1deg);}.restart.t-0 #an-obj-3{transform:translate3d(33px, 81px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);-webkit-transform:translate3d(33px, 81px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);}.restart #an-obj-3{animation-name:none !important;-webkit-animation-name:none !important;}#an-obj-4{transform:translate3d(109px, 103px, 0px);-webkit-transform:translate3d(109px, 103px, 0px);width:128px;height:115px;top:0;left:0;}@-webkit-keyframes ani-an-obj-4-0{0%{-webkit-transform:translate3d(109px, 103px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);-webkit-transform-origin:50% 50%;}7.0826%{-webkit-transform:translate3d(109px, 105px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(1.7deg);-webkit-transform-origin:61.72% 34.93%;}14.1653%{-webkit-transform:translate3d(109px, 103px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);-webkit-transform-origin:50% 50%;}23.6088%{-webkit-transform:translate3d(110px, 107px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-1.8deg);-webkit-transform-origin:50% 50%;}30.86%{-webkit-transform:translate3d(109px, 102px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(6.7deg);-webkit-transform-origin:50% 50%;}34.9073%{-webkit-transform:translate3d(109px, 105px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);-webkit-transform-origin:50% 50%;}39.629%{-webkit-transform:translate3d(109px, 102px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);-webkit-transform-origin:50% 50%;}47.2175%{-webkit-transform:translate3d(109px, 104px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);-webkit-transform-origin:50% 50%;}55.1433%{-webkit-transform:translate3d(109px, 102px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);-webkit-transform-origin:50% 50%;}61.5514%{-webkit-transform:translate3d(109px, 104px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);-webkit-transform-origin:50% 50%;}69.6459%{-webkit-transform:translate3d(109px, 101px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);-webkit-transform-origin:50% 50%;}72.6813%{-webkit-transform:translate3d(109px, 104px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);-webkit-transform-origin:50% 50%;}75.0422%{-webkit-transform:translate3d(109px, 101px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);-webkit-transform-origin:50% 50%;}80.9444%{-webkit-transform:translate3d(109px, 103px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);-webkit-transform-origin:50% 50%;}85.8347%{-webkit-transform:translate3d(109px, 101px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);-webkit-transform-origin:50% 50%;}91.0624%{-webkit-transform:translate3d(109px, 103px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);-webkit-transform-origin:50% 50%;}95.9528%{-webkit-transform:translate3d(109px, 101px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);-webkit-transform-origin:50% 50%;}100%{-webkit-transform:translate3d(109px, 103px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);-webkit-transform-origin:50% 50%;}}@keyframes ani-an-obj-4-0{0%{transform:translate3d(109px, 103px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);transform-origin:50% 50%;}7.0826%{transform:translate3d(109px, 105px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(1.7deg);transform-origin:61.72% 34.93%;}14.1653%{transform:translate3d(109px, 103px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);transform-origin:50% 50%;}23.6088%{transform:translate3d(110px, 107px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-1.8deg);transform-origin:50% 50%;}30.86%{transform:translate3d(109px, 102px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(6.7deg);transform-origin:50% 50%;}34.9073%{transform:translate3d(109px, 105px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);transform-origin:50% 50%;}39.629%{transform:translate3d(109px, 102px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);transform-origin:50% 50%;}47.2175%{transform:translate3d(109px, 104px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);transform-origin:50% 50%;}55.1433%{transform:translate3d(109px, 102px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);transform-origin:50% 50%;}61.5514%{transform:translate3d(109px, 104px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);transform-origin:50% 50%;}69.6459%{transform:translate3d(109px, 101px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);transform-origin:50% 50%;}72.6813%{transform:translate3d(109px, 104px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);transform-origin:50% 50%;}75.0422%{transform:translate3d(109px, 101px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);transform-origin:50% 50%;}80.9444%{transform:translate3d(109px, 103px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);transform-origin:50% 50%;}85.8347%{transform:translate3d(109px, 101px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);transform-origin:50% 50%;}91.0624%{transform:translate3d(109px, 103px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);transform-origin:50% 50%;}95.9528%{transform:translate3d(109px, 101px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);transform-origin:50% 50%;}100%{transform:translate3d(109px, 103px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);transform-origin:50% 50%;}}.run.t-0 #an-obj-4{animation-name:ani-an-obj-4-0;-webkit-animation-name:ani-an-obj-4-0;animation-duration:5.3909s;-webkit-animation-duration:5.3909s;animation-delay:0.0909s;-webkit-animation-delay:0.0909s;animation-fill-mode:both;-webkit-animation-fill-mode:both;}.t-0 #an-obj-4{transform:translate3d(109px, 103px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);-webkit-transform:translate3d(109px, 103px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);transform-origin:50% 50%;-webkit-transform-origin:50% 50%;}.restart.t-0 #an-obj-4{transform:translate3d(109px, 103px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);-webkit-transform:translate3d(109px, 103px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);transform-origin:50% 50%;-webkit-transform-origin:50% 50%;}.restart #an-obj-4{animation-name:none !important;-webkit-animation-name:none !important;}#an-obj-5{transform:translate3d(65px, 35px, 0px);-webkit-transform:translate3d(65px, 35px, 0px);width:65px;height:59px;top:0;left:0;}@-webkit-keyframes ani-an-obj-5-0{0%{-webkit-transform:translate3d(65px, 35px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);}7.4344%{-webkit-transform:translate3d(61px, 34px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-7.7deg);}14.7368%{-webkit-transform:translate3d(65px, 35px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);}22.686%{-webkit-transform:translate3d(65px, 35px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-0.9deg);}30.6352%{-webkit-transform:translate3d(61px, 34px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-7.7deg);}34.6778%{-webkit-transform:translate3d(68px, 35px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);}39.6271%{-webkit-transform:translate3d(65px, 35px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);}47.4149%{-webkit-transform:translate3d(61px, 34px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-7.7deg);}55.41%{-webkit-transform:translate3d(65px, 35px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);}62.0129%{-webkit-transform:translate3d(65px, 35px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-0.9deg);}69.4572%{-webkit-transform:translate3d(61px, 34px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-7.7deg);}72.3049%{-webkit-transform:translate3d(68px, 35px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);}75.1163%{-webkit-transform:translate3d(65px, 35px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);}81.1879%{-webkit-transform:translate3d(61px, 34px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-7.7deg);}85.7977%{-webkit-transform:translate3d(65px, 35px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);}91.6119%{-webkit-transform:translate3d(65px, 35px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-0.9deg);}95.9743%{-webkit-transform:translate3d(66px, 35px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);}100%{-webkit-transform:translate3d(61px, 34px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-7.7deg);}}@keyframes ani-an-obj-5-0{0%{transform:translate3d(65px, 35px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);}7.4344%{transform:translate3d(61px, 34px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-7.7deg);}14.7368%{transform:translate3d(65px, 35px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);}22.686%{transform:translate3d(65px, 35px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-0.9deg);}30.6352%{transform:translate3d(61px, 34px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-7.7deg);}34.6778%{transform:translate3d(68px, 35px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);}39.6271%{transform:translate3d(65px, 35px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);}47.4149%{transform:translate3d(61px, 34px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-7.7deg);}55.41%{transform:translate3d(65px, 35px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);}62.0129%{transform:translate3d(65px, 35px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-0.9deg);}69.4572%{transform:translate3d(61px, 34px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-7.7deg);}72.3049%{transform:translate3d(68px, 35px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);}75.1163%{transform:translate3d(65px, 35px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);}81.1879%{transform:translate3d(61px, 34px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-7.7deg);}85.7977%{transform:translate3d(65px, 35px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);}91.6119%{transform:translate3d(65px, 35px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-0.9deg);}95.9743%{transform:translate3d(66px, 35px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);}100%{transform:translate3d(61px, 34px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-7.7deg);}}.run.t-0 #an-obj-5{animation-name:ani-an-obj-5-0;-webkit-animation-name:ani-an-obj-5-0;animation-duration:5.402s;-webkit-animation-duration:5.402s;animation-delay:0.0909s;-webkit-animation-delay:0.0909s;animation-fill-mode:both;-webkit-animation-fill-mode:both;}.t-0 #an-obj-5{transform:translate3d(61px, 34px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-7.7deg);-webkit-transform:translate3d(61px, 34px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(-7.7deg);}.restart.t-0 #an-obj-5{transform:translate3d(65px, 35px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);-webkit-transform:translate3d(65px, 35px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);}.restart #an-obj-5{animation-name:none !important;-webkit-animation-name:none !important;}#an-scene-0 .an-stage{width:270px;height:230px;}
+
+    #an-anim {
+        background-color: transparent;
+        width: 270px;
+        height: 230px;
+        margin:0px auto;
+    }
+
+    .ui-header .ui-title {
+        margin-right: 10%;
+        margin-left: 10%;
+    }
+
+    .portada-fondo {
+        background-image: url(cielo2.jpg);
+        background-size: cover;
+    }
+</style>
+</head>
+<body>
+
+<!--RUTA DEL TAMBOR Y BOMBO-->
+
+<div data-role="page" data-control-title="Ruta del Tambor y Bombo" data-theme="b"
+id="page1" class="portada-fondo">
+    <div data-theme="a" data-role="header">
+        <h3>
+            Ruta del Tambor y Bombo
+        </h3>
+    </div>
+    <!--div data-role="content"-->
+        <div id="an-anim"><ol>
+
+        <li id="an-scene-0" >
+        <div class="an-stage">
+        <div id="an-obj-1"><div><img  height="183" width="148"  src="assets/Cuerpo.svg"></div></div>
+        <div id="an-obj-2"><div><img  height="88" width="88"  src="assets/Brazo2.svg"></div></div>
+        <div id="an-obj-3"><div><img  height="103" width="137"  src="assets/Brazo1.svg"></div></div>
+        <div id="an-obj-4"><div><img  height="115" width="128"  src="assets/Tambor.svg"></div></div>
+        <div id="an-obj-5"><div><img  height="59" width="65"  src="assets/Cabeza.svg"></div></div>
+        </div>
+        </li>
+
+        </ol></div>
+    <!--/div-->
+    <div data-theme="a" data-role="footer">
+        <ul data-role="listview" data-divider-theme="b" data-inset="true" class="menu-pad">
+            <li data-theme="a">
+                Semana Santa en la Ruta del Tambor y Bombo (Teruel)
+                <div style="width:200px; margin:0px auto;">
+                    <button data-role="button" data-theme="a" href="#page9" data-mini="true" data-icon="volume-up" data-iconpos="top">
+                        Toque de la ruta
+                    </button>
+                </div>
+            </li>
+            <li data-theme="a" data-icon="false">
+                <a href="#page5" data-transition="slide">
+                    Saludo
+                </a>
+            </li>
+            <li data-theme="a" data-icon="false">
+                <a href="#page6" data-transition="slide">
+                    Noticias
+                </a>
+            </li>
+            <li data-theme="a" data-icon="false">
+                <a href="#page7" data-transition="slide">
+                    Pueblos
+                </a>
+            </li>
+            <li data-theme="a" data-icon="false">
+                <a href="#page8" data-transition="slide">
+                    Enlaces y Contacto
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<!--SALUDO-->
+
+<div data-role="page" data-control-title="Saludo" data-theme="b" id="page5">
+    <div data-theme="a" data-role="header" data-position="fixed">
+        <h3>
+            Ruta del Tambor y Bombo
+        </h3>
+    </div>
+    <div data-role="content">
+        <h3>
+            Saludo
+        </h3>
+        <div data-controltype="textblock">
+            <p>
+                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
+                ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis
+                dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies
+                nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
+                Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In
+                enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum
+                felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus
+                elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula,
+                porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus
+                in, viverra quis.
+            </p>
+        </div>
+    </div>
+    <div data-theme="a" data-role="footer" data-position="fixed">
+        <div data-role="tabbar" data-iconpos="top" data-theme="a">
+            <ul>
+                <li>
+                    <a href="#page1" data-transition="fade" data-theme="" data-icon="refresh">
+                        Ruta
+                    </a>
+                </li>
+                <li>
+                    <a href="#page7" data-transition="fade" data-theme="" data-icon="home">
+                        Pueblos
+                    </a>
+                </li>
+                <li>
+                    <a href="#page6" data-transition="fade" data-theme="" data-icon="star">
+                        Noticias
+                    </a>
+                </li>
+                <li>
+                    <a href="#page8" data-transition="fade" data-theme="" data-icon="edit">
+                        Contacto
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<!--NOTICIAS-->
+
+<div data-role="page" data-control-title="Noticias" data-theme="b" id="page6">
+    <div data-theme="a" data-role="header" data-position="fixed">
+        <h3>
+            Ruta del Tambor y Bombo
+        </h3>
+    </div>
+    <div data-role="content">
+        <h3>
+            Noticias
+        </h3>
+        <ul data-role="listview" data-divider-theme="b" data-inset="true">
+            <li data-theme="c">
+                <a href="#page1" data-transition="slide">
+                    Ganador del Concurso de Cartel de la Semana Santa 2014
+                </a>
+            </li>
+            <li data-theme="c">
+                <a href="#page1" data-transition="slide">
+                    Button
+                </a>
+            </li>
+            <li data-theme="c">
+                <a href="#page1" data-transition="slide">
+                    Button
+                </a>
+            </li>
+            <li data-theme="c">
+                <a href="#page1" data-transition="slide">
+                    Button
+                </a>
+            </li>
+            <li data-theme="c">
+                <a href="#page1" data-transition="slide">
+                    Button
+                </a>
+            </li>
+            <li data-theme="c">
+                <a href="#page1" data-transition="slide">
+                    Button
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div data-theme="a" data-role="footer" data-position="fixed">
+        <div data-role="tabbar" data-iconpos="top" data-theme="a">
+            <ul>
+                <li>
+                    <a href="#page1" data-transition="fade" data-theme="" data-icon="refresh">
+                        Ruta
+                    </a>
+                </li>
+                <li>
+                    <a href="#page7" data-transition="fade" data-theme="" data-icon="home">
+                        Pueblos
+                    </a>
+                </li>
+                <li>
+                    <a href="#page6" data-transition="fade" data-theme="" data-icon="star">
+                        Noticias
+                    </a>
+                </li>
+                <li>
+                    <a href="#page8" data-transition="fade" data-theme="" data-icon="edit">
+                        Contacto
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<!--PUEBLOS-->
+
+<div data-role="page" data-control-title="Pueblos" data-theme="b" id="page7">
+    <div data-role="panel" id="panel1" data-position="left" data-display="reveal"
+    data-theme="a">
+        <ul data-role="listview" data-divider-theme="h" data-inset="false">
+            <li data-theme="a">
+                <a href="#page10" data-transition="slide">
+                    Albalate del Arzobispo
+                </a>
+            </li>
+            <li data-theme="a">
+                <a href="#page10" data-transition="slide">
+                    Alzañiz
+                </a>
+            </li>
+            <li data-theme="a">
+                <a href="#page1" data-transition="slide">
+                    Alcorisa
+                </a>
+            </li>
+            <li data-theme="a">
+                <a href="#page10" data-transition="slide">
+                    Andorra
+                </a>
+            </li>
+            <li data-theme="a">
+                <a href="#page1" data-transition="slide">
+                    Calanda
+                </a>
+            </li>
+            <li data-theme="a">
+                <a href="#page1" data-transition="slide">
+                    Hijar
+                </a>
+            </li>
+            <li data-theme="a">
+                <a href="#page1" data-transition="slide">
+                    Puebla de Hijar
+                </a>
+            </li>
+            <li data-theme="a">
+                <a href="#page1" data-transition="slide">
+                    Samper de Calanda
+                </a>
+            </li>
+            <li data-theme="a">
+                <a href="#page1" data-transition="slide">
+                    Urrea de Gaén
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div data-theme="a" data-role="header" data-position="fixed">
+        <a data-controltype="panelbutton" data-role="button" href="#panel1" data-icon="bars"
+        data-iconpos="left" class="ui-btn-left">
+            Pueblos
+        </a>
+        <h3>
+            Ruta del Tambor y Bombo
+        </h3>
+    </div>
+    <div data-role="content">
+        <h3>
+            Pueblos
+        </h3>
+    </div>
+    <div data-theme="a" data-role="footer" data-position="fixed">
+        <div data-role="tabbar" data-iconpos="top" data-theme="a">
+            <ul>
+                <li>
+                    <a href="#page1" data-transition="fade" data-theme="" data-icon="refresh">
+                        Ruta
+                    </a>
+                </li>
+                <li>
+                    <a href="#page7" data-transition="fade" data-theme="" data-icon="home">
+                        Pueblos
+                    </a>
+                </li>
+                <li>
+                    <a href="#page6" data-transition="fade" data-theme="" data-icon="star">
+                        Noticias
+                    </a>
+                </li>
+                <li>
+                    <a href="#page8" data-transition="fade" data-theme="" data-icon="edit">
+                        Contacto
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<!--TOQUE DE LA RUTA-->
+
+<div data-role="page" data-control-title="Toque de la ruta" data-theme="b"
+id="page9">
+    <div data-theme="a" data-role="header" data-position="fixed">
+        <h3>
+            Ruta del Tambor y Bombo
+        </h3>
+    </div>
+    <div data-role="content">
+        <h3>
+            Toque de la ruta
+        </h3>
+        <a data-role="button" data-theme="c" href="#page9">
+            Reproducir
+        </a>
+        <div data-controltype="textblock">
+            <p>
+                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
+                ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis
+                dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies
+                nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
+                Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In
+                enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum
+                felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus
+                elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula,
+                porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus
+                in, viverra quis.
+            </p>
+        </div>
+    </div>
+    <div data-theme="a" data-role="footer" data-position="fixed">
+        <div data-role="tabbar" data-iconpos="top" data-theme="a">
+            <ul>
+                <li>
+                    <a href="#page1" data-transition="fade" data-theme="" data-icon="refresh">
+                        Ruta
+                    </a>
+                </li>
+                <li>
+                    <a href="#page7" data-transition="fade" data-theme="" data-icon="home">
+                        Pueblos
+                    </a>
+                </li>
+                <li>
+                    <a href="#page6" data-transition="fade" data-theme="" data-icon="star">
+                        Noticias
+                    </a>
+                </li>
+                <li>
+                    <a href="#page8" data-transition="fade" data-theme="" data-icon="edit">
+                        Contacto
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<!--ENLACES Y CONTACTO-->
+
+<div data-role="page" data-control-title="Toque de la ruta" data-theme="b"
+id="page9">
+    <div data-theme="a" data-role="header" data-position="fixed">
+        <h3>
+            Ruta del Tambor y Bombo
+        </h3>
+    </div>
+    <div data-role="content">
+        <h3>
+            Toque de la ruta
+        </h3>
+        <a data-role="button" data-theme="c" href="#page9">
+            Reproducir
+        </a>
+        <div data-controltype="textblock">
+            <p>
+                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
+                ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis
+                dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies
+                nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
+                Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In
+                enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum
+                felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus
+                elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula,
+                porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus
+                in, viverra quis.
+            </p>
+        </div>
+    </div>
+    <div data-theme="a" data-role="footer" data-position="fixed">
+        <div data-role="tabbar" data-iconpos="top" data-theme="a">
+            <ul>
+                <li>
+                    <a href="#page1" data-transition="fade" data-theme="" data-icon="refresh">
+                        Ruta
+                    </a>
+                </li>
+                <li>
+                    <a href="#page7" data-transition="fade" data-theme="" data-icon="home">
+                        Pueblos
+                    </a>
+                </li>
+                <li>
+                    <a href="#page6" data-transition="fade" data-theme="" data-icon="star">
+                        Noticias
+                    </a>
+                </li>
+                <li>
+                    <a href="#page8" data-transition="fade" data-theme="" data-icon="edit">
+                        Contacto
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--CONTENIDO PUEBLOS-->
+
+<div data-role="page" data-control-title="Contenido Pueblos" data-theme="b"
+id="page10">
+    <div data-role="panel" id="panel3" data-position="left" data-display="reveal"
+    data-theme="a">
+        <ul data-role="listview" data-divider-theme="h" data-inset="false">
+            <li data-theme="a">
+                <a href="#page1" data-transition="slide">
+                    Albalate del Arzobispo
+                </a>
+            </li>
+            <li data-theme="a">
+                <a href="#page1" data-transition="slide">
+                    Alzañiz
+                </a>
+            </li>
+            <li data-theme="a">
+                <a href="#page1" data-transition="slide">
+                    Alcorisa
+                </a>
+            </li>
+            <li data-theme="a">
+                <a href="#page1" data-transition="slide">
+                    Andorra
+                </a>
+            </li>
+            <li data-theme="a">
+                <a href="#page1" data-transition="slide">
+                    Calanda
+                </a>
+            </li>
+            <li data-theme="a">
+                <a href="#page1" data-transition="slide">
+                    Hijar
+                </a>
+            </li>
+            <li data-theme="a">
+                <a href="#page1" data-transition="slide">
+                    Puebla de Hijar
+                </a>
+            </li>
+            <li data-theme="a">
+                <a href="#page1" data-transition="slide">
+                    Samper de Calanda
+                </a>
+            </li>
+            <li data-theme="a">
+                <a href="#page1" data-transition="slide">
+                    Urrea de Gaén
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div data-role="panel" id="panel2" data-position="left" data-display="reveal"
+    data-theme="a">
+        <ul data-role="listview" data-divider-theme="h" data-inset="false">
+            <li data-theme="a">
+                <a href="#page1" data-transition="slide">
+                    Albalate del Arzobispo
+                </a>
+            </li>
+            <li data-theme="a">
+                <a href="#page1" data-transition="slide">
+                    Alzañiz
+                </a>
+            </li>
+            <li data-theme="a">
+                <a href="#page1" data-transition="slide">
+                    Alcorisa
+                </a>
+            </li>
+            <li data-theme="a">
+                <a href="#page1" data-transition="slide">
+                    Andorra
+                </a>
+            </li>
+            <li data-theme="a">
+                <a href="#page1" data-transition="slide">
+                    Calanda
+                </a>
+            </li>
+            <li data-theme="a">
+                <a href="#page1" data-transition="slide">
+                    Hijar
+                </a>
+            </li>
+            <li data-theme="a">
+                <a href="#page1" data-transition="slide">
+                    Puebla de Hijar
+                </a>
+            </li>
+            <li data-theme="a">
+                <a href="#page1" data-transition="slide">
+                    Samper de Calanda
+                </a>
+            </li>
+            <li data-theme="a">
+                <a href="#page1" data-transition="slide">
+                    Urrea de Gaén
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div data-theme="a" data-role="header" data-position="fixed">
+        <a data-controltype="panelbutton" data-role="button" href="#panel3" data-icon="bars"
+        data-iconpos="left" class="ui-btn-left">
+            Pueblos
+        </a>
+        <h3>
+            Ruta del Tambor y Bombo
+        </h3>
+    </div>
+    <div data-role="content">
+        <h3>
+            Albalate del Arzobispo
+        </h3>
+        <ul data-role="listview" data-divider-theme="b" data-inset="true">
+            <li data-theme="a">
+                <a href="#page11" data-transition="slide">
+                    Como llegar
+                </a>
+            </li>
+            <li data-theme="a">
+                <a href="#page13" data-transition="slide">
+                    Tradición
+                </a>
+            </li>
+            <li data-theme="a">
+                <a href="#page14" data-transition="slide">
+                    Actos programados
+                </a>
+            </li>
+            <li data-theme="a">
+                <a href="#page18" data-transition="slide">
+                    Información de interés
+                </a>
+            </li>
+        </ul>
+        <div data-controltype="textblock">
+            <p>
+                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
+                ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis
+                dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies
+                nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
+                Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In
+                enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum
+                felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus
+                elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula,
+                porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus
+                in, viverra quis.
+            </p>
+        </div>
+        <a data-role="button" data-theme="c" href="#page10">
+            Volver
+        </a>
+    </div>
+    <div data-theme="a" data-role="footer" data-position="fixed">
+        <div data-role="tabbar" data-iconpos="top" data-theme="a">
+            <ul>
+                <li>
+                    <a href="#page1" data-transition="fade" data-theme="" data-icon="refresh">
+                        Ruta
+                    </a>
+                </li>
+                <li>
+                    <a href="#page7" data-transition="fade" data-theme="" data-icon="home">
+                        Pueblos
+                    </a>
+                </li>
+                <li>
+                    <a href="#page6" data-transition="fade" data-theme="" data-icon="star">
+                        Noticias
+                    </a>
+                </li>
+                <li>
+                    <a href="#page8" data-transition="fade" data-theme="" data-icon="edit">
+                        Contacto
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--COMO LLEGAR-->
+
+<div data-role="page" data-control-title="Como llegar" data-theme="b"
+id="page11">
+    <div data-theme="a" data-role="header" data-position="fixed">
+        <a data-role="button" href="#page10" class="ui-btn-left">
+            Volver
+        </a>
+        <h3>
+            Ruta del Tambor y Bombo
+        </h3>
+    </div>
+    <div data-role="content">
+        <h3>
+            Como llegar
+        </h3>
+    </div>
+    <div data-theme="a" data-role="footer" data-position="fixed">
+        <div data-role="tabbar" data-iconpos="top" data-theme="a">
+            <ul>
+                <li>
+                    <a href="#page1" data-transition="fade" data-theme="" data-icon="refresh">
+                        Ruta
+                    </a>
+                </li>
+                <li>
+                    <a href="#page7" data-transition="fade" data-theme="" data-icon="home">
+                        Pueblos
+                    </a>
+                </li>
+                <li>
+                    <a href="#page6" data-transition="fade" data-theme="" data-icon="star">
+                        Noticias
+                    </a>
+                </li>
+                <li>
+                    <a href="#page8" data-transition="fade" data-theme="" data-icon="edit">
+                        Contacto
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<!--TRADICIÓN-->
+
+<div data-role="page" data-control-title="Tradición" data-theme="b" id="page13">
+    <div data-theme="a" data-role="header" data-position="fixed">
+        <a data-role="button" href="#page10" class="ui-btn-left">
+            Volver
+        </a>
+        <h3>
+            Ruta del Tambor y Bombo
+        </h3>
+    </div>
+    <div data-role="content">
+        <h3>
+            Tradición
+        </h3>
+        <div data-controltype="textblock">
+            <p>
+                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
+                ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis
+                dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies
+                nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
+                Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In
+                enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum
+                felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus
+                elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula,
+                porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus
+                in, viverra quis.
+            </p>
+        </div>
+    </div>
+    <div data-theme="a" data-role="footer" data-position="fixed">
+        <div data-role="tabbar" data-iconpos="top" data-theme="a">
+            <ul>
+                <li>
+                    <a href="#page1" data-transition="fade" data-theme="" data-icon="refresh">
+                        Ruta
+                    </a>
+                </li>
+                <li>
+                    <a href="#page7" data-transition="fade" data-theme="" data-icon="home">
+                        Pueblos
+                    </a>
+                </li>
+                <li>
+                    <a href="#page6" data-transition="fade" data-theme="" data-icon="star">
+                        Noticias
+                    </a>
+                </li>
+                <li>
+                    <a href="#page8" data-transition="fade" data-theme="" data-icon="edit">
+                        Contacto
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--ACTOS PROGRAMADOS-->
+
+<div data-role="page" data-control-title="Actos programados" data-theme="b"
+id="page14">
+    <div data-theme="a" data-role="header" data-position="fixed">
+        <a data-role="button" href="#page10" class="ui-btn-left">
+            Volver
+        </a>
+        <h3>
+            Ruta del Tambor y Bombo
+        </h3>
+    </div>
+    <div data-role="content">
+        <h3>
+            Actos programados
+        </h3>
+        <ul data-role="listview" data-divider-theme="b" data-inset="true">
+            <li data-theme="c">
+                <a href="#page1" data-transition="slide">
+                    Recorrido Semana Santa
+                </a>
+            </li>
+            <li data-theme="c">
+                <a href="#page1" data-transition="slide">
+                    Button
+                </a>
+            </li>
+            <li data-theme="c">
+                <a href="#page1" data-transition="slide">
+                    Button
+                </a>
+            </li>
+            <li data-theme="c">
+                <a href="#page1" data-transition="slide">
+                    Button
+                </a>
+            </li>
+            <li data-theme="c">
+                <a href="#page1" data-transition="slide">
+                    Button
+                </a>
+            </li>
+            <li data-theme="c">
+                <a href="#page1" data-transition="slide">
+                    Button
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div data-theme="a" data-role="footer" data-position="fixed">
+        <div data-role="tabbar" data-iconpos="top" data-theme="a">
+            <ul>
+                <li>
+                    <a href="#page1" data-transition="fade" data-theme="" data-icon="refresh">
+                        Ruta
+                    </a>
+                </li>
+                <li>
+                    <a href="#page7" data-transition="fade" data-theme="" data-icon="home">
+                        Pueblos
+                    </a>
+                </li>
+                <li>
+                    <a href="#page6" data-transition="fade" data-theme="" data-icon="star">
+                        Noticias
+                    </a>
+                </li>
+                <li>
+                    <a href="#page8" data-transition="fade" data-theme="" data-icon="edit">
+                        Contacto
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--INFORMACION DE INTERES-->
+
+<div data-role="page" data-control-title="Información de interés" data-theme="b"
+id="page18">
+    <div data-theme="a" data-role="header" data-position="fixed">
+        <a data-role="button" href="#page10" class="ui-btn-left">
+            Volver
+        </a>
+        <h3>
+            Ruta del Tambor y Bombo
+        </h3>
+    </div>
+    <div data-role="content">
+        <h3>
+            Información de interés
+        </h3>
+        <ul data-role="listview" data-divider-theme="b" data-inset="true">
+            <li data-theme="a">
+                <a href="#page15" data-transition="slide">
+                    Que visitar
+                </a>
+            </li>
+            <li data-theme="a">
+                <a href="#page16" data-transition="slide">
+                    Dónde comer
+                </a>
+            </li>
+            <li data-theme="a">
+                <a href="#page19" data-transition="slide">
+                    Dónde dormir
+                </a>
+            </li>
+            <li data-theme="a">
+                <a href="#page17" data-transition="slide">
+                    Contacta
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div data-theme="a" data-role="footer" data-position="fixed">
+        <div data-role="tabbar" data-iconpos="top" data-theme="a">
+            <ul>
+                <li>
+                    <a href="#page1" data-transition="fade" data-theme="" data-icon="refresh">
+                        Ruta
+                    </a>
+                </li>
+                <li>
+                    <a href="#page7" data-transition="fade" data-theme="" data-icon="home">
+                        Pueblos
+                    </a>
+                </li>
+                <li>
+                    <a href="#page6" data-transition="fade" data-theme="" data-icon="star">
+                        Noticias
+                    </a>
+                </li>
+                <li>
+                    <a href="#page8" data-transition="fade" data-theme="" data-icon="edit">
+                        Contacto
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--QUE VISITAR-->
+
+<div data-role="page" data-control-title="Que visitar" data-theme="b"
+id="page15">
+    <div data-theme="a" data-role="header" data-position="fixed">
+        <a data-role="button" href="#page18" class="ui-btn-left">
+            Volver
+        </a>
+        <h3>
+            Ruta del Tambor y Bombo
+        </h3>
+    </div>
+    <div data-role="content">
+        <h3>
+            Que visitar
+        </h3>
+        <ul data-role="listview" data-divider-theme="b" data-inset="true">
+            <li data-theme="c">
+                <a href="#page1" data-transition="slide">
+                    Museo La Rueca
+                </a>
+            </li>
+            <li data-theme="c">
+                <a href="#page1" data-transition="slide">
+                    Button
+                </a>
+            </li>
+            <li data-theme="c">
+                <a href="#page1" data-transition="slide">
+                    Button
+                </a>
+            </li>
+            <li data-theme="c">
+                <a href="#page1" data-transition="slide">
+                    Button
+                </a>
+            </li>
+            <li data-theme="c">
+                <a href="#page1" data-transition="slide">
+                    Button
+                </a>
+            </li>
+            <li data-theme="c">
+                <a href="#page1" data-transition="slide">
+                    Button
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div data-theme="a" data-role="footer" data-position="fixed">
+        <div data-role="tabbar" data-iconpos="top" data-theme="a">
+            <ul>
+                <li>
+                    <a href="#page1" data-transition="fade" data-theme="" data-icon="refresh">
+                        Ruta
+                    </a>
+                </li>
+                <li>
+                    <a href="#page7" data-transition="fade" data-theme="" data-icon="home">
+                        Pueblos
+                    </a>
+                </li>
+                <li>
+                    <a href="#page6" data-transition="fade" data-theme="" data-icon="star">
+                        Noticias
+                    </a>
+                </li>
+                <li>
+                    <a href="#page8" data-transition="fade" data-theme="" data-icon="edit">
+                        Contacto
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<!--DONDE COMER-->
+
+<div data-role="page" data-control-title="Donde comer" data-theme="b"
+id="page16">
+    <div data-theme="a" data-role="header" data-position="fixed">
+        <a data-role="button" href="#page18" class="ui-btn-left">
+            Volver
+        </a>
+        <h3>
+            Ruta del Tambor y Bombo
+        </h3>
+    </div>
+    <div data-role="content">
+        <h3>
+            Dónde comer
+        </h3>
+        <ul data-role="listview" data-divider-theme="b" data-inset="true">
+            <li data-theme="c">
+                <a href="#page1" data-transition="slide">
+                    Restaurante Rural Andorra
+                </a>
+            </li>
+            <li data-theme="c">
+                <a href="#page1" data-transition="slide">
+                    Button
+                </a>
+            </li>
+            <li data-theme="c">
+                <a href="#page1" data-transition="slide">
+                    Button
+                </a>
+            </li>
+            <li data-theme="c">
+                <a href="#page1" data-transition="slide">
+                    Button
+                </a>
+            </li>
+            <li data-theme="c">
+                <a href="#page1" data-transition="slide">
+                    Button
+                </a>
+            </li>
+            <li data-theme="c">
+                <a href="#page1" data-transition="slide">
+                    Button
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div data-theme="a" data-role="footer" data-position="fixed">
+        <div data-role="tabbar" data-iconpos="top" data-theme="a">
+            <ul>
+                <li>
+                    <a href="#page1" data-transition="fade" data-theme="" data-icon="refresh">
+                        Ruta
+                    </a>
+                </li>
+                <li>
+                    <a href="#page7" data-transition="fade" data-theme="" data-icon="home">
+                        Pueblos
+                    </a>
+                </li>
+                <li>
+                    <a href="#page6" data-transition="fade" data-theme="" data-icon="star">
+                        Noticias
+                    </a>
+                </li>
+                <li>
+                    <a href="#page8" data-transition="fade" data-theme="" data-icon="edit">
+                        Contacto
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<!--DONDE DORMIR-->
+
+<div data-role="page" data-control-title="Donde dormir" data-theme="b"
+id="page19">
+    <div data-theme="a" data-role="header" data-position="fixed">
+        <a data-role="button" href="#page18" class="ui-btn-left">
+            Volver
+        </a>
+        <h3>
+            Ruta del Tambor y Bombo
+        </h3>
+    </div>
+    <div data-role="content">
+        <h3>
+            Dónde dormir
+        </h3>
+        <ul data-role="listview" data-divider-theme="b" data-inset="true">
+            <li data-theme="c">
+                <a href="#page1" data-transition="slide">
+                    Restaurante Rural Andorra
+                </a>
+            </li>
+            <li data-theme="c">
+                <a href="#page1" data-transition="slide">
+                    Button
+                </a>
+            </li>
+            <li data-theme="c">
+                <a href="#page1" data-transition="slide">
+                    Button
+                </a>
+            </li>
+            <li data-theme="c">
+                <a href="#page1" data-transition="slide">
+                    Button
+                </a>
+            </li>
+            <li data-theme="c">
+                <a href="#page1" data-transition="slide">
+                    Button
+                </a>
+            </li>
+            <li data-theme="c">
+                <a href="#page1" data-transition="slide">
+                    Button
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div data-theme="a" data-role="footer" data-position="fixed">
+        <div data-role="tabbar" data-iconpos="top" data-theme="a">
+            <ul>
+                <li>
+                    <a href="#page1" data-transition="fade" data-theme="" data-icon="refresh">
+                        Ruta
+                    </a>
+                </li>
+                <li>
+                    <a href="#page7" data-transition="fade" data-theme="" data-icon="home">
+                        Pueblos
+                    </a>
+                </li>
+                <li>
+                    <a href="#page6" data-transition="fade" data-theme="" data-icon="star">
+                        Noticias
+                    </a>
+                </li>
+                <li>
+                    <a href="#page8" data-transition="fade" data-theme="" data-icon="edit">
+                        Contacto
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--CONTACTA-->
+
+
+<div data-role="page" data-control-title="Contacta" data-theme="b" id="page17">
+    <div data-theme="a" data-role="header" data-position="fixed">
+        <a data-role="button" href="#page18" class="ui-btn-left">
+            Volver
+        </a>
+        <h3>
+            Ruta del Tambor y Bombo
+        </h3>
+    </div>
+    <div data-role="content">
+        <h3>
+            Contacta
+        </h3>
+        <ul data-role="listview" data-divider-theme="b" data-inset="true">
+            <li data-theme="c">
+                <a href="#page1" data-transition="slide">
+                    Ayuntamiento
+                </a>
+            </li>
+            <li data-theme="c">
+                <a href="#page1" data-transition="slide">
+                    Teléfonos de interés
+                </a>
+            </li>
+            <li data-theme="c">
+                <a href="#page1" data-transition="slide">
+                    Farmacia
+                </a>
+            </li>
+            <li data-theme="c">
+                <a href="#page1" data-transition="slide">
+                    Button
+                </a>
+            </li>
+            <li data-theme="c">
+                <a href="#page1" data-transition="slide">
+                    Button
+                </a>
+            </li>
+            <li data-theme="c">
+                <a href="#page1" data-transition="slide">
+                    Button
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div data-theme="a" data-role="footer" data-position="fixed">
+        <div data-role="tabbar" data-iconpos="top" data-theme="a">
+            <ul>
+                <li>
+                    <a href="#page1" data-transition="fade" data-theme="" data-icon="refresh">
+                        Ruta
+                    </a>
+                </li>
+                <li>
+                    <a href="#page7" data-transition="fade" data-theme="" data-icon="home">
+                        Pueblos
+                    </a>
+                </li>
+                <li>
+                    <a href="#page6" data-transition="fade" data-theme="" data-icon="star">
+                        Noticias
+                    </a>
+                </li>
+                <li>
+                    <a href="#page8" data-transition="fade" data-theme="" data-icon="edit">
+                        Contacto
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
