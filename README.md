@@ -1,6 +1,5 @@
 # ESTUDIO DE APLICACIONES
-PROINDEMNIZA
-
+RUTA DEL TAMBOR Y BOMBO
 
 [cordova-app]: http://github.com/apache/cordova-app-hello-world
 
