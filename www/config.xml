@@ -133,7 +133,7 @@
 
         Otherwise, you can specify specific domains:
     -->
-    <access />
+    <access origin="*" />
     <!--<access origin="*"/>  allow local pages -->
     <!--
         <access origin="http://phonegap.com" />                    - allow any secure requests to http://phonegap.com/
