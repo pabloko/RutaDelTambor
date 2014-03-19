@@ -15,10 +15,11 @@
 	 	//push notifications handler
 		document.addEventListener('push-notification', function(event) {
 					var notification = event.notification;
+					
 					navigator.notification.alert(notification.aps.alert);
 
 					//to view full push payload
-					navigator.notification.alert(JSON.stringify(notification));
+					//navigator.notification.alert(JSON.stringify(notification));
 
 					//reset badges on icon
 					pushNotification.setApplicationIconBadgeNumber(0);
@@ -73,10 +74,8 @@
 					}
 
 					//and show alert
-					alert(title + ' event: ' + JSON.stringify(event));
 					navigator.notification.alert(title + ' event: ' + JSON.stringify(event));
 
-					pushNotification.unregister(function() {},function() {});
 					//stopping geopushes
 					//pushNotification.stopGeoPushes();
 				  });
@@ -103,7 +102,7 @@
 
 		pushNotification.getTags(function(tags) {
 								//console.warn('tags for the device: ' + JSON.stringify(tags));
-								alert('tags for the device: ' + JSON.stringify(tags));
+								console.warn('tags for the device: ' + JSON.stringify(tags));
 							 },
 							 function(error) {
 								console.warn('get tags error: ' + JSON.stringify(error));
@@ -215,7 +214,7 @@
 	    	
 	        initPushwoosh();
 
-	        //navigator.network.isReachable("rutadeltamborybombo.com", this.reachableCallback, {});
+	        navigator.network.isReachable("rutadeltamborybombo.com", this.reachableCallback, {});
 
 	        app.receivedEvent('deviceready');
 
