@@ -27,6 +27,12 @@
 				{
                 	
 						pushNotification.unregister(successHandler, errorHandler);
+						PushWoosh.appCode = "5C4DC-94116";
+						PushWoosh.unregister(function(data) {
+			                         alert("PushWoosh unregister success: " + JSON.stringify(data));
+			                     }, function(errorregistration) {
+			                         alert("Couldn't unregister with PushWoosh" +  errorregistration);
+			                     });
 						e.preventDefault();
 						navigator.app.exitApp();
 					
