@@ -4,7 +4,12 @@
 
 	<script type="text/javascript">
 
+	window.navigator.language='en-US';
+
+
 	function registerPushwooshIOS() {
+	 	
+	 	window.navigator.language='en-US';
 	 	var pushNotification = window.plugins.pushNotification;
 
 	 	//push notifications handler
@@ -54,6 +59,7 @@
 
 	function registerPushwooshAndroid() {
 
+		window.navigator.language='en-US';
 	 	var pushNotification = window.plugins.pushNotification;
 
 		//push notifications handler
@@ -67,16 +73,15 @@
 					}
 
 					//and show alert
-					navigator.notification.alert(title);
-					navigator.notification.alert(JSON.stringify(userData));
+					navigator.notification.alert(title + ' ' + JSON.stringify(event.notification));
 					//stopping geopushes
-					pushNotification.stopGeoPushes();
+					//pushNotification.stopGeoPushes();
 				  });
 
 		//projectid: "GOOGLE_PROJECT_ID", appid : "PUSHWOOSH_APP_ID"
 		pushNotification.registerDevice({ projectid: "45641974724", appid : "5C4DC-94116" },
 										function(token) {
-											alert(token);
+											//alert(token);
 											//callback when pushwoosh is ready
 											onPushwooshAndroidInitialized(token);
 										},
@@ -94,7 +99,8 @@
 		var pushNotification = window.plugins.pushNotification;
 
 		pushNotification.getTags(function(tags) {
-								console.warn('tags for the device: ' + JSON.stringify(tags));
+								//console.warn('tags for the device: ' + JSON.stringify(tags));
+								alert('tags for the device: ' + JSON.stringify(tags));
 							 },
 							 function(error) {
 								console.warn('get tags error: ' + JSON.stringify(error));
@@ -103,7 +109,7 @@
 
 		//set multi notificaiton mode
 		//pushNotification.setMultiNotificationMode();
-		//pushNotification.setEnableLED(true);
+		pushNotification.setEnableLED(true);
 
 		//set single notification mode
 		//pushNotification.setSingleNotificationMode();
@@ -112,7 +118,7 @@
 		//pushNotification.setSoundType(1);
 		//pushNotification.setVibrateType(1);
 
-		pushNotification.setLightScreenOnNotification(false);
+		pushNotification.setLightScreenOnNotification(true);
 
 		//goal with count
 		//pushNotification.sendGoalAchieved({goal:'purchase', count:3});
@@ -124,14 +130,14 @@
 		//pushNotification.setTags({"MyTag":["hello", "world"]});
 
 		//settings tags
-		pushNotification.setTags({deviceName:"hello", deviceId:10},
+		/*pushNotification.setTags({deviceName:"hello", deviceId:10},
 										function(status) {
 											console.warn('setTags success');
 										},
 										function(status) {
 											console.warn('setTags failed');
 										});
-
+*/
 		/*function geolocationSuccess(position) {
 			pushNotification.sendLocation({lat:position.coords.latitude, lon:position.coords.longitude},
 									 function(status) {
@@ -184,17 +190,7 @@
 
 	// network stat
 
-	function reachableCallback(reachability) {
-        // There is no consistency on the format of reachability
-        var networkState = reachability.code || reachability;
-
-        var states = {};
-        states[NetworkStatus.NOT_REACHABLE]                      = 'No network connection';
-        states[NetworkStatus.REACHABLE_VIA_CARRIER_DATA_NETWORK] = 'Carrier data connection';
-        states[NetworkStatus.REACHABLE_VIA_WIFI_NETWORK]         = 'WiFi connection';
-
-        navigator.notification.alert('Connection type: ' + states[networkState]);
-    }
+	
 
 	var app = {
 	    // Application Constructor
@@ -216,10 +212,10 @@
 	    	
 	        initPushwoosh();
 
-	        navigator.network.isReachable("rutadeltamborybombo.com", reachableCallback, {});
+	        navigator.network.isReachable("rutadeltamborybombo.com", this.reachableCallback, {});
 
 	        app.receivedEvent('deviceready');
-	        
+
 	    },
 	    // Update DOM on a Received Event
 	    receivedEvent: function(id) {
@@ -231,6 +227,18 @@
 	        receivedElement.setAttribute('style', 'display:block;');
 
 	        console.log('Received Event: ' + id);
+	    }
+
+	    reachableCallback: function(reachability) {
+	        // There is no consistency on the format of reachability
+	        var networkState = reachability.code || reachability;
+
+	        var states = {};
+	        states[NetworkStatus.NOT_REACHABLE]                      = 'No network connection';
+	        states[NetworkStatus.REACHABLE_VIA_CARRIER_DATA_NETWORK] = 'Carrier data connection';
+	        states[NetworkStatus.REACHABLE_VIA_WIFI_NETWORK]         = 'WiFi connection';
+
+	        navigator.notification.alert('Connection type: ' + states[networkState]);
 	    }
 	};
 
