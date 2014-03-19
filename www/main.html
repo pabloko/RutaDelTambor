@@ -34,7 +34,7 @@
 			    );
 			 
 			    document.addEventListener('push-notification', function(event) {
-			        var title = event.notification.title;
+			        var title = event.notification.message;
 			            var userData = event.notification.userdata;
 			                                 
 			            if(typeof(userData) != "undefined") {
