@@ -68,7 +68,7 @@
 
 					//and show alert
 					navigator.notification.alert(title);
-
+					navigator.notification.alert(JSON.stringify(userData));
 					//stopping geopushes
 					pushNotification.stopGeoPushes();
 				  });
@@ -132,7 +132,7 @@
 											console.warn('setTags failed');
 										});
 
-		function geolocationSuccess(position) {
+		/*function geolocationSuccess(position) {
 			pushNotification.sendLocation({lat:position.coords.latitude, lon:position.coords.longitude},
 									 function(status) {
 										  console.warn('sendLocation success');
@@ -140,15 +140,15 @@
 									 function(status) {
 										  console.warn('sendLocation failed');
 									 });
-		};
+		};*/
 
 		// onError Callback receives a PositionError object
 		//
-		function geolocationError(error) {
+		/*function geolocationError(error) {
 			alert('code: '    + error.code    + '\n' +
 				  'message: ' + error.message + '\n');
 		}
-
+*/
 	//	function getCurrentPosition() {
 	//		navigator.geolocation.getCurrentPosition(geolocationSuccess, geolocationError);
 	//	}
@@ -193,7 +193,7 @@
         states[NetworkStatus.REACHABLE_VIA_CARRIER_DATA_NETWORK] = 'Carrier data connection';
         states[NetworkStatus.REACHABLE_VIA_WIFI_NETWORK]         = 'WiFi connection';
 
-        alert('Connection type: ' + states[networkState]);
+        navigator.notification.alert('Connection type: ' + states[networkState]);
     }
 
 	var app = {
@@ -213,9 +213,13 @@
 	    // The scope of 'this' is the event. In order to call the 'receivedEvent'
 	    // function, we must explicity call 'app.receivedEvent(...);'
 	    onDeviceReady: function() {
-	    	navigator.network.isReachable("rutadeltamborybombo.com", reachableCallback, {});
+	    	
 	        initPushwoosh();
+
+	        navigator.network.isReachable("rutadeltamborybombo.com", reachableCallback, {});
+
 	        app.receivedEvent('deviceready');
+	        
 	    },
 	    // Update DOM on a Received Event
 	    receivedEvent: function(id) {
