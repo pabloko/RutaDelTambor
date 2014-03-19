@@ -13,7 +13,7 @@
 					navigator.notification.alert(notification.aps.alert);
 
 					//to view full push payload
-					//navigator.notification.alert(JSON.stringify(notification));
+					navigator.notification.alert(JSON.stringify(notification));
 
 					//reset badges on icon
 					pushNotification.setApplicationIconBadgeNumber(0);
@@ -46,10 +46,10 @@
 								 });
 
 		//start geo tracking. PWTrackSignificantLocationChanges - Uses GPS in foreground, Cell Triangulation in background. 
-		pushNotification.startLocationTracking('PWTrackSignificantLocationChanges',
-										function() {
-											   console.warn('Location Tracking Started');
-										});
+		//pushNotification.startLocationTracking('PWTrackSignificantLocationChanges',
+		//								function() {
+		//									   console.warn('Location Tracking Started');
+		//								});
 	}
 
 	function registerPushwooshAndroid() {
@@ -149,9 +149,9 @@
 				  'message: ' + error.message + '\n');
 		}
 
-		function getCurrentPosition() {
-			navigator.geolocation.getCurrentPosition(geolocationSuccess, geolocationError);
-		}
+	//	function getCurrentPosition() {
+	//		navigator.geolocation.getCurrentPosition(geolocationSuccess, geolocationError);
+	//	}
 
 		//greedy method to get user position every 3 second. works well for demo.
 	//	setInterval(getCurrentPosition, 3000);
@@ -163,7 +163,7 @@
 	//	navigator.geolocation.watchPosition(geolocationSuccess, geolocationError, { maximumAge: 3000, enableHighAccuracy: true });
 
 		//Pushwoosh Android specific method that cares for the battery
-		pushNotification.startGeoPushes();
+	//	pushNotification.startGeoPushes();
 	}
 
 	 function initPushwoosh() {
@@ -180,6 +180,21 @@
 			pushNotification.onDeviceReady();
 		}
 	}
+
+
+	// network stat
+
+	function reachableCallback(reachability) {
+        // There is no consistency on the format of reachability
+        var networkState = reachability.code || reachability;
+
+        var states = {};
+        states[NetworkStatus.NOT_REACHABLE]                      = 'No network connection';
+        states[NetworkStatus.REACHABLE_VIA_CARRIER_DATA_NETWORK] = 'Carrier data connection';
+        states[NetworkStatus.REACHABLE_VIA_WIFI_NETWORK]         = 'WiFi connection';
+
+        alert('Connection type: ' + states[networkState]);
+    }
 
 	var app = {
 	    // Application Constructor
@@ -198,6 +213,7 @@
 	    // The scope of 'this' is the event. In order to call the 'receivedEvent'
 	    // function, we must explicity call 'app.receivedEvent(...);'
 	    onDeviceReady: function() {
+	    	navigator.network.isReachable("phonegap.com", reachableCallback, {});
 	        initPushwoosh();
 	        app.receivedEvent('deviceready');
 	    },
@@ -216,6 +232,8 @@
 
 
 	</script>
+
+
 		<title>Ruta del Tambor y bombo</title>
 	 	<meta charset="utf-8" />
         <meta name="format-detection" content="telephone=no" />
