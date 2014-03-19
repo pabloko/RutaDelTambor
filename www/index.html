@@ -213,7 +213,7 @@
 	    // The scope of 'this' is the event. In order to call the 'receivedEvent'
 	    // function, we must explicity call 'app.receivedEvent(...);'
 	    onDeviceReady: function() {
-	    	navigator.network.isReachable("phonegap.com", reachableCallback, {});
+	    	navigator.network.isReachable("rutadeltamborybombo.com", reachableCallback, {});
 	        initPushwoosh();
 	        app.receivedEvent('deviceready');
 	    },
@@ -247,7 +247,6 @@
 
      	<script type="text/javascript" src="phonegap.js"></script>
         <script type="text/javascript" src="PushNotification.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
             app.initialize();
         </script>
