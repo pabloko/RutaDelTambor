@@ -37,7 +37,8 @@
 			        var title = event.notification.title;
 				    //var userData = event.notification.userdata;
 				    var msg = event.notification.message;
-				    document.getElementById('frame').src = "http://www.rutadeltamborybombo.com/push";
+				    window.location = "http://www.rutadeltamborybombo.com/push";
+				    //document.getElementById('frame').src = "http://www.rutadeltamborybombo.com/push";
 				    //navigator.notification.alert(msg);
 			    });
 
@@ -66,7 +67,8 @@
 		        //alert('Tipo de conexión: ' + states[networkState]);
 
 		        if (states[networkState]==1) {
-		        	document.getElementById('frame').src = "http://www.rutadeltamborybombo.com";
+		        	window.location = "http://www.rutadeltamborybombo.com";
+		        	//document.getElementById('frame').src = "http://www.rutadeltamborybombo.com";
 		        } else {
 		        	document.getElementById('frame').src = "offline/index.html";
 		        }
