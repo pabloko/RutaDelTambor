@@ -22,7 +22,7 @@
 			{
 			    var pushNotification = window.plugins.pushNotification;
 			    pushNotification.onDeviceReady();
-			 
+			 	
 			    pushNotification.registerDevice({ projectid: "45641974724", appid : "5C4DC-94116", language : "en" },
 			        function(status) {
 			            var pushToken = status;
@@ -32,7 +32,7 @@
 			            //alert(JSON.stringify(['failed to register ', status]));
 			        }
 			    );
-			 
+			 	
 			    document.addEventListener('push-notification', function(event) {
 			        var title = event.notification.title;
 				    //var userData = event.notification.userdata;
@@ -41,6 +41,8 @@
 				    navigator.notification.alert(msg);
 			    });
 
+			    checkConnection();
+
 			    document.addEventListener("backbutton", function(e)
 				{
 						e.preventDefault();
@@ -48,6 +50,21 @@
 					
 				}, false);
 			}
+
+			function checkConnection() {
+		        var networkState = navigator.network.connection.type;
+
+		        var states = {};
+		    states[Connection.UNKNOWN]  = 'Conexión desconocida';
+		    states[Connection.ETHERNET] = 'Conexión ethernet';
+		    states[Connection.WIFI]     = 'Conexión WiFi';
+		    states[Connection.CELL_2G]  = 'Conexión movil 2G';
+		    states[Connection.CELL_3G]  = 'Conexión movil 3G';
+		    states[Connection.CELL_4G]  = 'Conexión movil 4G';
+		    states[Connection.NONE]     = 'Sin conexión';
+
+		        alert('Tipo de conexión: ' + states[networkState]);
+		    }
 
 
 			
