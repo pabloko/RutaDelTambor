@@ -4,7 +4,7 @@
 <widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id        = "com.estudiodeaplicaciones.rutadeltambor"
-        version   = "1.0.5">
+        version   = "1.0.6">
 
     <name>Ruta del Tambor y Bombo</name>
 
@@ -68,8 +68,8 @@
         <gap:plugin name="com.phonegap.plugins.barcodescanner" />
     -->
     
-   <!--gap:plugin name="com.pushwoosh.plugins.pushwoosh" /-->
-   <gap:plugin name="com.estudiodeaplicaciones.plugins.pushwoosh" />
+   <gap:plugin name="com.pushwoosh.plugins.pushwoosh" >
+   
     
     <!--
 	MINE IS BETTER!
