@@ -23,15 +23,42 @@
 			    var pushNotification = window.plugins.pushNotification;
 			    pushNotification.onDeviceReady();
 			 	
-			    pushNotification.registerDevice({ projectid: "45641974724", appid : "5C4DC-94116", language : "en" },
-			        function(status) {
-			            var pushToken = status;
-			            //alert('push token: ' + pushToken);
-			        },
-			        function(status) {
-			            //alert(JSON.stringify(['failed to register ', status]));
-			        }
-			    );
+				if(device.platform == "Android")
+				{
+					//android
+					pushNotification.registerDevice({ projectid: "45641974724", appid : "5C4DC-94116", language : "en" },
+						function(status) {
+							var pushToken = status;
+							//alert('push token: ' + pushToken);
+							checkConnection();
+						},
+						function(status) {
+							//alert(JSON.stringify(['failed to register ', status]));
+							checkConnection();
+						}
+					);
+				}
+
+				if(device.platform == "iPhone" || device.platform == "iOS")
+				{
+					//apple
+					pushNotification.registerDevice({alert:true, badge:true, sound:true, pw_appid:"5C4DC-94116", appname:"Ruta del Tambor y Bombo"},
+						function(status) {
+							var deviceToken = status['deviceToken'];
+							console.warn('registerDevice: ' + deviceToken);
+							checkConnection();
+						},
+						function(status) {
+							console.warn('failed to register : ' + JSON.stringify(status));
+							//navigator.notification.alert(JSON.stringify(['failed to register ', status]));
+							checkConnection();
+						}
+					);
+				}
+				
+				
+				
+
 			 	
 			    document.addEventListener('push-notification', function(event) {
 			        var title = event.notification.title;
@@ -40,9 +67,12 @@
 				    window.location = "http://www.rutadeltamborybombo.com/push";
 				    //document.getElementById('frame').src = "http://www.rutadeltamborybombo.com/push";
 				    //navigator.notification.alert(msg);
+					if(device.platform == "iPhone" || device.platform == "iOS") {
+						pushNotification.setApplicationIconBadgeNumber(0); 
+					}
 			    });
 
-			    checkConnection();
+			    
 
 			    document.addEventListener("backbutton", function(e)
 				{
