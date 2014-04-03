@@ -20,7 +20,6 @@
 
 	        function initPushwoosh()
 			{
-				var win=0;
 			    var pushNotification = window.plugins.pushNotification;
 			    pushNotification.onDeviceReady();
 			 	
@@ -39,11 +38,8 @@
 							checkConnection();
 						}
 					);
-				} else {
-					win=1;
-				}
-
-				if(device.platform == "iPhone" || device.platform == "iOS")
+				} 
+				else if(device.platform == "iPhone" || device.platform == "iOS")
 				{
 					//apple
 					pushNotification.registerDevice({alert:true, badge:true, sound:true, pw_appid:"5C4DC-94116", appname:"Ruta del Tambor y Bombo"},
@@ -58,12 +54,9 @@
 							checkConnection();
 						}
 					);
-				} else {
-					win=1;
-				}
-				
-				
-				if (win==1) {
+				} 
+				else 
+				{
 					checkConnection();
 				}
 
