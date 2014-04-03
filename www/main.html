@@ -20,9 +20,11 @@
 
 	        function initPushwoosh()
 			{
+				var win=0;
 			    var pushNotification = window.plugins.pushNotification;
 			    pushNotification.onDeviceReady();
 			 	
+				
 				if(device.platform == "Android")
 				{
 					//android
@@ -37,6 +39,8 @@
 							checkConnection();
 						}
 					);
+				} else {
+					win=1;
 				}
 
 				if(device.platform == "iPhone" || device.platform == "iOS")
@@ -54,10 +58,14 @@
 							checkConnection();
 						}
 					);
+				} else {
+					win=1;
 				}
 				
 				
-				
+				if (win==1) {
+					checkConnection();
+				}
 
 			 	
 			    document.addEventListener('push-notification', function(event) {
