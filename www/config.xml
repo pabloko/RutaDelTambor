@@ -154,9 +154,9 @@
         <access />            - a blank access tag denies access to all external resources.
         <access origin="*" /> - a wildcard access tag allows access to all external resource.
 
-        Otherwise, you can specify specific domains: origin="*"
+        Otherwise, you can specify specific domains: origin="*"<access />
     -->
-    <access />
+    
     <!--<access origin="*"/>  allow local pages -->
     <!--
         <access origin="http://phonegap.com" />                    - allow any secure requests to http://phonegap.com/
