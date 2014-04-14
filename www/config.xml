@@ -156,16 +156,16 @@
 
         Otherwise, you can specify specific domains: origin="*"<access />
     -->
-    
+    <access origin="*"/>
     <!--<access origin="*"/>  allow local pages -->
     <!--
         <access origin="http://phonegap.com" />                    - allow any secure requests to http://phonegap.com/
         <access origin="http://phonegap.com" subdomains="true" />  - same as above, but including subdomains, such as http://build.phonegap.com/
 	-->
-    <access origin="http://rutadeltamborybombo.com" subdomains="true" />
+    <!--access origin="http://rutadeltamborybombo.com" subdomains="true" />
 	<access origin="http://cp.pushwoosh.com" subdomains="true" />
 	<access origin="http://googleapis.com" subdomains="true" />
 	<access origin="http://gstatic.com" subdomains="true" />
 	<access origin="http://googleusercontent.com" subdomains="true" />
-	<access origin="http://estudiodeaplicaciones.com" subdomains="true" />
+	<access origin="http://estudiodeaplicaciones.com" subdomains="true" /-->
 </widget>
