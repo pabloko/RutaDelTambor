@@ -1,10 +1,10 @@
 <!doctype html>
 <html lang="es">
   
-
+<!-- Mirrored from www.rutadeltamborybombo.com/enlaces-y-contacto by HTTrack Website Copier/3.x [XR&CO'2013], Thu, 05 Mar 2015 19:16:11 GMT -->
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 <head>
-    <title>Semana Santa en la Ruta del Tambor y Bombo (Teruel) | Ruta del Tambor y Bombo</title>
+    <title>Enlaces y contacto | Ruta del Tambor y Bombo</title>
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,7 +26,8 @@
 
 
 
-<script type="text/javascript" src="cordova.js"></script>
+
+
 
 
 
@@ -38,7 +39,7 @@
 
 
 
-<link rel="canonical" href="index.html" />
+<link rel="canonical" href="enlaces-y-contacto.html" />
 		<link rel="alternate" type="application/rss+xml" title="Ruta del Tambor y Bombo" href="blog/rss/all.html" />
 		<meta name="keywords" content="" />
 		<meta name="robots" content="index,follow" />
@@ -114,15 +115,150 @@
   }
 }
 </style>
-       
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
+       <script>
+      var map;
+      var brooklyn = new google.maps.LatLng(41.092055,-0.307599);
 
-<script>
+      var MY_MAPTYPE_ID = 'custom_style';
+
+      function initialize() {
+
+        var featureOpts = [
+          {
+            stylers: [
+              { hue: '#b2cdff' }, ///#b2cdff
+              { visibility: 'simplified' },
+              { gamma: 1.5 },
+              { weight: 6 }
+            ]
+          },
+          {
+            elementType: 'labels',
+            stylers: [
+              { visibility: 'on' }
+            ]
+          },
+          {
+            featureType: 'water',
+            stylers: [
+              { color: '#fff' }
+            ]
+          }
+        ];
+
+        var mapOptions = {
+          zoom: 10,
+          center: brooklyn,
+        scrollwheel: false,
+        draggable:false,
+          mapTypeControlOptions: {
+            mapTypeIds: [MY_MAPTYPE_ID]
+          },
+          mapTypeId: MY_MAPTYPE_ID
+        };
+
+        map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+
+        var styledMapOptions = {
+          name: 'Ruta del tambor y bombo'
+        };
+
+        var customMapType = new google.maps.StyledMapType(featureOpts, styledMapOptions);
+
+        map.mapTypes.set(MY_MAPTYPE_ID, customMapType);
+
+        setMarkers(map, beaches);
+      }
+
+      /**
+       * Data for the markers consisting of a name, a LatLng and a zIndex for
+       * the order in which these markers should display on top of each
+       * other.
+       */
+      var beaches = [
+        ['Albalate',41.12283, -0.51106, 1,'albalate'],
+        ['Andorra', 40.9767, -0.4517, 2,'andorra'],
+        ['Alcorisa', 40.89254, -0.38182, 3,'alcorisa'],
+        ['Calanda', 40.9419, -0.2329, 4,'calanda'],
+        ['AlcaÃ±iz', 41.04971, -0.13177, 5,'alcaniz'],
+        ['Samper', 41.1889848,-0.3842233, 6,'samper'],
+        ['Hijar', 41.1717581,-0.4462084, 7,'hijar'],
+        ['La puebla', 41.22962, -0.44151,8,'la-puebla'],
+        ['Urrea', 41.16001, -0.47027, 9,'urrea']
+      ];
+
+      function setMarkers(map, locations) {
+        // Add markers to the map
+
+        // Marker sizes are expressed as a Size of X,Y
+        // where the origin of the image (0,0) is located
+        // in the top left of the image.
+
+        // Origins, anchor positions and coordinates of the marker
+        // increase in the X direction to the right and in
+        // the Y direction down.
+        var image = new google.maps.MarkerImage('1.html',
+            // This marker is 20 pixels wide by 32 pixels tall.
+            new google.maps.Size(90, 80),
+            // The origin for this image is 0,0.
+            new google.maps.Point(0,0),
+            // The anchor for this image is the base of the flagpole at 0,32.
+            new google.maps.Point(40, 85));
+        var shadow = new google.maps.MarkerImage('sombra.html',
+            // The shadow image is larger in the horizontal dimension
+            // while the position and offset are the same as for the main image.
+            new google.maps.Size(90, 60),
+            new google.maps.Point(0,0),
+            new google.maps.Point(0, 0));
+            // Shapes define the clickable region of the icon.
+            // The type defines an HTML <area> element 'poly' which
+            // traces out a polygon as a series of X,Y points. The final
+            // coordinate closes the poly by connecting to the first
+            // coordinate.
+        var shape = {
+            coord: [1, 1, 1, 80, 90, 60, 68 , 1],
+            type: 'poly'
+        };
+
+        //var marker=[];
+
+        for (var i = 0; i < locations.length; i++) {
+          var beach = locations[i];
+          var myLatLng = new google.maps.LatLng(beach[1], beach[2]);
+          var marker = new google.maps.Marker({
+              position: myLatLng,
+              map: map,
+              //shadow: shadow,
+              icon: new google.maps.MarkerImage('http://estudiodeaplicaciones.com/apps/tambor/'+beach[4]+'.png',
+              new google.maps.Size(90, 80),
+              new google.maps.Point(0,0),
+              new google.maps.Point(45, 55)),
+              shape: shape,
+              //title: beach[0],
+              zIndex: beach[3]
+          });
+          clkevent(marker,beach[4]);
+        }
+      }
+
+      function clkevent(mark, name) {
+        google.maps.event.addListener(mark, 'click', function() {
+            //alert(name)
+            location.href = "http://www.rutadeltamborybombo.com/pueblos/" + name;
+        });
+
+      }
+
+      google.maps.event.addDomListener(window, 'load', initialize);
+
+
 
 $( document ).ready(function() {
      $('#rotator').backstretch([
 
-            //"http://www.rutadeltamborybombo.com/files/large/1a2f4be27b73110",
-			"files/large/1a2f4be27b73110.jpg",
+            "http://www.rutadeltamborybombo.com/files/large/1a2f4be27b73110",
             "files/large/afbc89b9e3fb0e2.jpg",
             "files/large/8ff4fdb2997d4a9.jpg",
             "files/large/b62a21cddcabd22.jpg",
@@ -135,6 +271,15 @@ $( document ).ready(function() {
             "files/large/2115b153328805f.jpg",
             "files/large/b315292a10225a0.jpg",
       
+        /* "http://www.rutadeltamborybombo.com/addons/shared_addons/themes/bootstrapThree/img/ALBALATE.jpg"
+        , "http://www.rutadeltamborybombo.com/addons/shared_addons/themes/bootstrapThree/img/ALCANIZ.jpg"
+        , "http://www.rutadeltamborybombo.com/addons/shared_addons/themes/bootstrapThree/img/ALCORISA.jpg"
+        , "http://www.rutadeltamborybombo.com/addons/shared_addons/themes/bootstrapThree/img/ANDORRA.jpg"
+        , "http://www.rutadeltamborybombo.com/addons/shared_addons/themes/bootstrapThree/img/CALANDA.jpg"
+        , "http://www.rutadeltamborybombo.com/addons/shared_addons/themes/bootstrapThree/img/HIJAR.jpg"
+        , "http://www.rutadeltamborybombo.com/addons/shared_addons/themes/bootstrapThree/img/LAPUEBLA.jpg"
+        , "http://www.rutadeltamborybombo.com/addons/shared_addons/themes/bootstrapThree/img/SAMPER.jpg"
+        , "http://www.rutadeltamborybombo.com/addons/shared_addons/themes/bootstrapThree/img/URREA.jpg"*/
         ], {duration: 3000, fade: 750});
   });
 
@@ -318,7 +463,7 @@ line-height: 25px;
 
   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <ul class="nav navbar-nav navbar-right">
-      <li class="first parent"><a href="bienvenidos.html">Bienvenidos</a></li><li class="parent"><a href="http://rutadeltamborybombo.com/blog" target="_blank">Noticias</a></li><li class="parent"><a href="historia.html">Historia</a></li><li class="parent"><a href="organigrama.html">La asociación</a></li><li class="parent"><a href="horarios.html">Semana Santa 2015</a></li><li class="last parent"><a href="enlaces-y-contacto.html">Enlaces y Contactos</a></li>
+      <li class="first"><a href="bienvenidos.html">Bienvenidos</a></li><li><a href="http://rutadeltamborybombo.com/blog" target="_blank">Noticias</a></li><li><a href="historia.html">Historia</a></li><li><a href="organigrama.html">La asociación</a></li><li><a href="horarios.html">Semana Santa 2015</a></li><li class="last current parent"><a href="enlaces-y-contacto.html">Enlaces y Contactos</a></li>
     </ul>
 
     
@@ -331,25 +476,6 @@ line-height: 25px;
 </nav>
 
 
-
-
-<div id="rotator" class="jumbotron" style=" background-size:cover">
-  <div class="container">
-    <div class="col-sm-2 simbolo">
-      <img src="rutadeltambor.png" width="100%"/>
-    </div>
-
-    <div class="col-sm-8 centermovil cabecera" style="margin-top:30px;">
-      <h1><span>Ruta del Tambor y Bombo</span></h1>
-      <p>Declarada de Interés Turístico Internacional.</p>
-     
-      <p><i>"Tierra de pasión"</i></p>
-    </div>
-    <div class="col-sm-2 nomovil">
-      <img style="margin-top:45px" src="addons/shared_addons/themes/bootstrapThree/img/aragon.png"/>
-    </div>
-  </div>
-</div>
 
 
 
@@ -367,175 +493,152 @@ line-height: 25px;
 
 
 
-  
+       	<div class="container contenido">
+           	
 
+              <br /><br />
+<h1>Enlaces y contacto</h1>
 
-
-                        <div class="dark-wrapper">
-    <div class="container">
-      
-      <div class="col-sm-6" style="margin-bottom:15px; position:relative; overflow: auto;">
-        <div class="clearfix">
-          <div class="col-sm-4 mobile-col-3" style="text-align:center">
-            <a href="pueblos/albalate.html"><div class="icon"> <img src="addons/shared_addons/themes/bootstrapThree/img/albalate.png"/> </div>
-            <!-- /.icon -->
-            <div class="text">
-              <button style="background-color: #151515; border-color: #000000; color: #FFFFFF;"  class="btn btn-default btn-info btn-sm" type="button">Albalate</button></a>
-            </div>
-            <!-- /.text --> 
-          </div>
-          <!-- /.col-sm-2 -->
-          <div class="col-sm-4 mobile-col-3" style="text-align:center">
-             <a href="pueblos/alcaniz.html"><div class="icon"> <img src="addons/shared_addons/themes/bootstrapThree/img/alcaniz.png"/> </div>
-            <!-- /.icon -->
-            <div class="text">
-             <button style="background-color: #19A0FA; border-color: #1181CB; color: #FFFFFF;"  class="btn btn-default btn-info btn-sm" type="button">Alcañiz</button></a>
-            </div>
-            <!-- /.text --> 
-          </div>
-          <!-- /.col-sm-2 -->
-          <div class="col-sm-4 mobile-col-3" style="text-align:center">
-            <a href="pueblos/alcorisa.html"><div class="icon"> <img src="addons/shared_addons/themes/bootstrapThree/img/alcorisa.png"/> </div>
-            <!-- /.icon -->
-            <div class="text">
-              <button style="background-color: #4B088A; border-color: #29088A; color: #FFFFFF;" class="btn btn-default btn-default btn-sm" type="button">Alcorisa</button></a>
-            </div>
-            <!-- /.text --> 
-          </div>
-          <!-- /.col-sm-2 --> 
-        
-        
-          <div class="col-sm-4 mobile-col-3" style="text-align:center">
-            <a href="pueblos/andorra.html"><div class="icon"> <img src="addons/shared_addons/themes/bootstrapThree/img/andorra.png"/> </div>
-            <!-- /.icon -->
-            <div class="text">
-              <button style="background-color: #151515; border-color: #000000; color: #FFFFFF;"  class="btn btn-default btn-info btn-sm" type="button">Andorra</button></a>
-            </div>
-            <!-- /.text --> 
-          </div>
-          <!-- /.col-sm-2 -->
-          <div class="col-sm-4 mobile-col-3" style="text-align:center">
-            <a href="pueblos/calanda.html"><div class="icon"> <img src="addons/shared_addons/themes/bootstrapThree/img/calanda.png"/> </div>
-            <!-- /.icon -->
-            <div class="text">
-              <button style="background-color: #4B088A; border-color: #29088A; color: #FFFFFF;"  class="btn btn-default btn-danger btn-sm" type="button">Calanda</button></a>
-             
-            </div>
-            <!-- /.text --> 
-          </div>
-          <!-- /.col-sm-2 -->
-          <div class="col-sm-4 mobile-col-3" style="text-align:center">
-            <a href="pueblos/hijar.html"><div class="icon"> <img src="addons/shared_addons/themes/bootstrapThree/img/hijar.png"/> </div>
-            <!-- /.icon -->
-            <div class="text">
-              <button style="background-color: #151515; border-color: #000000; color: #FFFFFF;"  class="btn btn-default btn-info btn-sm" type="button">Hijar</button></a>
-              
-            </div>
-            <!-- /.text --> 
-          </div>
-          <!-- /.col-sm-2 -->
-
-     
-          <div class="col-sm-4 mobile-col-3" style="text-align:center">
-            <a href="pueblos/la-puebla.html"><div class="icon"> <img src="addons/shared_addons/themes/bootstrapThree/img/lapuebla.png"/> </div>
-            <!-- /.icon -->
-            <div class="text">
-              <button style="background-color: #151515; border-color: #000000; color: #FFFFFF;"  class="btn btn-default btn-info btn-sm" type="button">La Puebla</button></a>
-            </div>
-            <!-- /.text --> 
-          </div>
-          <!-- /.col-sm-2 -->
-          <div class="col-sm-4 mobile-col-3" style="text-align:center">
-            <a href="pueblos/samper.html"><div class="icon"> <img src="addons/shared_addons/themes/bootstrapThree/img/samper.png"/> </div>
-            <!-- /.icon -->
-            <div class="text">
-              <button style="background-color: #151515; border-color: #000000; color: #FFFFFF;"  class="btn btn-default btn-info btn-sm" type="button">Samper</button></a>
-              
-            </div>
-            <!-- /.text --> 
-          </div>
-          <!-- /.col-sm-2 -->
-          <div class="col-sm-4 mobile-col-3" style="text-align:center">
-          <a href="pueblos/urrea.html"><div class="icon"> <img src="addons/shared_addons/themes/bootstrapThree/img/urrea.png" /> </div>
-            <!-- /.icon -->
-            <div class="text">
-              <button style="background-color: #151515; border-color: #000000; color: #FFFFFF;"  class="btn btn-default btn-inverse btn-sm" type="button">Urrea</button></a>
-              
-            </div>
-            <!-- /.text --> 
-          </div>
-          <!-- /.col-sm-2 --> 
-        
-
-        </div>
-        
-        </div>
-
-        <div class="col-sm-6" style="text-align:center; margin-bottom:15px;">
-            <a href="https://www.facebook.com/ruta.deltambor" target="_blank"><img src="addons/shared_addons/themes/bootstrapThree/img/fb.png" target="_blank"/></a>
-            <a href="https://twitter.com/@RUTATAMBORYBOMB" target="_blank"><img src="addons/shared_addons/themes/bootstrapThree/img/twi.png"/></a>
-            <a href="http://www.youtube.com/user/rutadeltamborybombo?feature=watch" target="_blank"><img src="addons/shared_addons/themes/bootstrapThree/img/you.png"/></a>
-            <a href="mailto:asociacion@rutaldeltamborybombo.com"><img src="addons/shared_addons/themes/bootstrapThree/img/soci.png"/></a>
-
-        </div>
-        
-        <div class="col-sm-6 nomovil">
-          <div>
-            <h3>Historia de la Ruta</h3><br>
-            <p>Los sonidos de los pueblos que integran la Ruta del Tambor y el Bombo son la voz de una comarca llena de valores y riquezas que unidas y coordinadas pueden alcanzar resonancias insospechadas lejos de nuestras tierras. Esta es la idea original que dio pie a la fundación de esta asociación, y Mariano Laborda su precursor.</p>
-            <p>Los tambores de Calanda comenzaron a conocerse gracias a la labor de su gran cineasta y escritor Luis Buñuel, y la Semana Santa de Híjar había sido nombrada de Interés turístico. Sin embargo, los tambores y bombos era un fenómeno sociocultural de carácter simbólico en varios municipios de este territorio...</p>
-              <a href="historia.html" class="btn btn-default btn-info btn-sm" style="float:right"><span class="glyphicon glyphicon-align-justify"></span> Leer más</a>
-          </div>
-        </div>
-        
-
-  </div>
-
-</div>           
-            
-  </div></div>
-
-
-<div class="container" style="margin-bottom:20px;margin-top:20px;">
-     <div class="col-sm-12">
-     <center>
-     <h1>Las fotos de La Ruta</h1>
-     Sube tus fotos en La Ruta del Tambor y Bombo, las mejores serán publicadas en la web y en nuestras redes sociales.
-     <br/><br/>
-	 <div id="fotos-botones">
-     <a href="#fotos-progreso" onclick="takePicture();" class="btn btn-success">Haz una foto con tu cámara</a>
-     <a href="#fotos-progreso" onclick="selectPicture();" class="btn btn-danger">Elige una foto</a>
-	 </div>
-	 <div id="fotos-progreso" style="display:none;">
-	 <img src="ajax.gif" />
-	 </div>
-	 
 <br />
-	<img style="width:120px;visibility:hidden;display:none;" id="camera_image" src="" />
-<br />
-    <div id="server_images" style="height:300px; width:100%; overflow:scroll;"></div>
+<div class="col-sm-6" style="overflow: auto;">
+<h4><strong>Contacta con nosotros</strong></h4>
 
+<hr />
+<p><a href="mailto:asociacion@rutadeltamborybombo.com">asociacion@rutadeltamborybombo.com</a><br />
+<a href="mailto:presidente@rutadeltamborybombo.com">presidente@rutadeltamborybombo.com</a></p>
+</div>
 
-     
-     </center>
-     </div>
+<div class="col-sm-6" style="overflow: auto;">
+<h4><strong>Enlaces de Interés</strong></h4>
+
+<hr />
+<ul class="list-unstyled">
+	<li></li>
+	<li><a href="http://www.dpteruel.es/">Diputación de Teruel</a></li>
+	<li></li>
+	<li><a href="http://www.teruelversionoriginal.es/">Turismo de Teruel</a></li>
+	<li></li>
+	<li><a href="http://www.turismoandorrasierradearcos.com/">Andorra Sierra de Arcos</a></li>
+	<li></li>
+	<li><a href="http://www.turismobajomartin.es/">Bajo Martín</a></li>
+	<li></li>
+	<li><a href="http://www.turismobajoaragon.es/">Bajo Aragon</a></li>
+	<li></li>
+	<li><a href="http://top100aragon.com/index.php">Top 100 Aragon</a></li>
+	<li></li>
+	<li><a href="http://www.tamboresybombosdeespana.es/">Consorcio Nacional</a></li>
+	<li></li>
+</ul>
 </div>
 
 
 
+<br /><br />
 
-  <div class="container" style="margin-bottom:20px;margin-top:20px;">
-      <iframe style="" width="100%" height="120" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/133254945&amp;color=ff9900&amp;auto_play=false&amp;hide_related=false&amp;show_user=false"></iframe>
-  </div>
-
-     
+  
 
 
 
 
+<!-- MENU PARA ALBALATE -->
 
 
-  <div class="" style="border-top:10px solid #eee; background: #222222; background-position:center center;">
+          
+<!-- FIN MENU ALBALATE -->
+
+
+
+
+<!-- MENU PARA ALCANIZ -->
+
+
+          
+<!-- FIN MENU ALCANIZ -->
+
+
+
+
+<!-- MENU PARA ALCORISA -->
+
+
+          
+<!-- FIN MENU ALCORISA -->
+
+          
+
+
+
+
+<!-- MENU PARA ANDORRA -->
+
+
+          
+<!-- FIN MENU ANDORRA -->
+
+
+
+<!-- MENU PARA CALANDA -->
+
+
+          
+<!-- FIN MENU CALANDA -->
+
+
+
+
+<!-- MENU PARA HIJAR -->
+
+
+          
+<!-- FIN MENU HIJAR -->
+
+
+
+
+<!-- MENU PARA LA PUEBLA -->
+
+
+          
+<!-- FIN MENU LA PUEBLA -->
+
+
+
+
+
+<!-- MENU PARA SAMPER -->
+
+
+          
+<!-- FIN MENU SAMPER -->
+
+
+
+
+<!-- MENU PARA URREA -->
+
+
+          
+<!-- FIN MENU URREA -->
+
+      </div>
+    </br></br>
+
+
+
+            <div id="map-canvas" style="width: 100%; height: 420px; margin-left: auto; margin-right: auto;"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="nomovil" style="border-top:10px solid #eee; background: #222222; background-position:center center;">
 
     <div class="container">
       <div class="col-sm-12">&nbsp;</div>
@@ -771,239 +874,17 @@ line-height: 25px;
       });
 
 
-});
+      //INICIO NOTIFICACIONES PUSH 
 	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	     
-    var deviceReady = false;
-    /**
-     * Take picture with camera
-     */
-    function takePicture() {
-		$('#fotos-botones').hide();
-		$('#fotos-progreso').show();
-        navigator.camera.getPicture(
-            function(uri) {
-                var img = document.getElementById('camera_image');
-                img.style.visibility = "visible";
-                img.style.display = "block";
-                img.src = uri;
-                //document.getElementById('camera_status').innerHTML = "Success";
-				uploadPicture();
-            },
-            function(e) {
-                //console.log("Error getting picture: " + e);
-                //document.getElementById('camera_status').innerHTML = "Error getting picture.";
-				$('#fotos-botones').show();
-				$('#fotos-progreso').hide();
-            },
-            { quality: 50, destinationType: navigator.camera.DestinationType.FILE_URI});
-    };
-    /**
-     * Select picture from library
-     */
-    function selectPicture() {
-		$('#fotos-botones').hide();
-		$('#fotos-progreso').show();
-        navigator.camera.getPicture(
-            function(uri) {
-                var img = document.getElementById('camera_image');
-                img.style.visibility = "visible";
-                img.style.display = "block";
-                img.src = uri;
-                //document.getElementById('camera_status').innerHTML = "Success";
-				uploadPicture();
-            },
-            function(e) {
-                //console.log("Error getting picture: " + e);
-                //document.getElementById('camera_status').innerHTML = "Error getting picture.";
-				$('#fotos-botones').show();
-				$('#fotos-progreso').hide();
-            },
-            { quality: 50, destinationType: navigator.camera.DestinationType.FILE_URI, sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY});
-    };
-    
-    /**
-     * Upload current picture
-     */
-    function uploadPicture() {
-    	
-    	// Get URI of picture to upload
-        var img = document.getElementById('camera_image');
-        var imageURI = img.src;
-        if (!imageURI || (img.style.display == "none")) {
-            document.getElementById('camera_status').innerHTML = "Take picture or select picture from library first.";
-            return;
-        }
-        
-        // Verify server has been entered
-        server = document.getElementById('serverUrl').value;
-        if (server) {
-        	
-            // Specify transfer options
-            var options = new FileUploadOptions();
-            options.fileKey="file";
-            options.fileName=imageURI.substr(imageURI.lastIndexOf('/')+1);
-            options.mimeType="image/jpeg";
-            options.chunkedMode = false;
-            // Transfer picture to server
-            var ft = new FileTransfer();
-            ft.upload(imageURI, server, function(r) {
-                //document.getElementById('camera_status').innerHTML = "Upload successful: "+r.bytesSent+" bytes uploaded.";  
-				$('#fotos-botones').show();
-				$('#fotos-progreso').hide();
-				viewUploadedPictures();
-            }, function(error) {
-                //document.getElementById('camera_status').innerHTML = "Upload failed: Code = "+error.code;    
-				alert('No se ha podido subir la foto, active una conexión a internet o intentelo más tarde.');
-				$('#fotos-botones').show();
-				$('#fotos-progreso').hide();
-            }, options);
-        }
-    }
-    /**
-     * View pictures uploaded to the server
-     */
-    function viewUploadedPictures() {
-    	
-    	// Get server URL
-        server = document.getElementById('serverUrl').value;
-        if (server) {
-        	
-            // Get HTML that lists all pictures on server using XHR	
-            var xmlhttp = new XMLHttpRequest();
-            // Callback function when XMLHttpRequest is ready
-            xmlhttp.onreadystatechange=function(){
-                if(xmlhttp.readyState === 4){
-                    // HTML is returned, which has pictures to display
-                    if (xmlhttp.status === 200) {
-                    	document.getElementById('server_images').innerHTML = xmlhttp.responseText;
-                    }
-                    // If error
-                    else {
-                    	document.getElementById('server_images').innerHTML = "Error retrieving pictures from server.";
-                    }
-                }
-            };
-            xmlhttp.open("GET", server , true);
-            xmlhttp.send();       	
-        }	
-    }
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	function registerPushwooshIOS() {
- 	var pushNotification = window.plugins.pushNotification;
-
- 	//set push notification callback before we initialize the plugin
-	document.addEventListener('push-notification',
-		function(event)
-		{
-			window.location = "http://rutadeltamborybombo.com/push";
-			//clear the app badge
-			pushNotification.setApplicationIconBadgeNumber(0);
-		}
-	);
-
-	//initialize the plugin
-    pushNotification.onDeviceReady({pw_appid:"5C4DC-94116"});
-
-	//register for pushes
-	pushNotification.registerDevice(
-		function(status)
-		{
-			var deviceToken = status['deviceToken'];
-			//alert('registerDevice: ' + deviceToken);
-		},
-		function(status)
-		{
-			//alert('failed to register : ' + JSON.stringify(status));
-		}
-	);
-	//reset badges on start
-	pushNotification.setApplicationIconBadgeNumber(0);
-}
-
-
-	
-	
-	
-function registerPushwooshAndroid() {
-
- 	var pushNotification = window.plugins.pushNotification;
-
-	//set push notifications handler
-	document.addEventListener('push-notification',
-		function(event)
-		{
-			window.location = "http://rutadeltamborybombo.com/push";
-		}
-	);
-
-	//initialize Pushwoosh with projectid: "GOOGLE_PROJECT_ID", appid : "PUSHWOOSH_APP_ID". This will trigger all pending push notifications on start.
-	pushNotification.onDeviceReady({ projectid: "45641974724", pw_appid : "5C4DC-94116", appid : "5C4DC-94116" });
-
-	//register for push notifications
-	pushNotification.registerDevice(
-		function(token)
-		{
-			//alert(token);
-		},
-		function(status)
-		{
-		    //alert(JSON.stringify(['failed to register ', status]));
-		}
-	);
-}	
-	
-	
-	
-	
-	
-    
-    /**
-     * Function called when page has finished loading.
-     */
-    function initPush() {
-	
-			var pushNotification = window.plugins.pushNotification;
-
-        document.addEventListener("deviceready", function() {
-			deviceReady = true;
-			viewUploadedPictures();
-			
+	  document.addEventListener('push-notification', function(event) {
+            window.location = "http://rutadeltamborybombo.com/push";
 			if(device.platform == "iPhone" || device.platform == "iOS")
 			{
-				registerPushwooshIOS();
-			} else {
-				registerPushwooshAndroid();
+				pushNotification.setApplicationIconBadgeNumber(0);
 			}
-			initPushwoosh();
-			
-		}, false);
-    }
-	  
-	  
-	  
-	  
-	  
+       });
+        
+      });
 
     </script>
     <center>
@@ -1025,12 +906,12 @@ function registerPushwooshAndroid() {
 
     </script>
 
-    <input id="serverUrl" type="hidden" value="http://rutadeltamborybombo.com/upload.php" />
+    
 
    </body>
 
    	
   
 
-
+<!-- Mirrored from www.rutadeltamborybombo.com/enlaces-y-contacto by HTTrack Website Copier/3.x [XR&CO'2013], Thu, 05 Mar 2015 19:16:11 GMT -->
 </html>
